@@ -11,8 +11,8 @@ class SignInScreen extends StatefulWidget {
 
 class _SignInScreenState extends State<SignInScreen> {
 
-  TextEditingController _tEcEmail = TextEditingController();
-  TextEditingController _tEcPassword = TextEditingController();
+  final TextEditingController _tEcEmail = TextEditingController();
+  final TextEditingController _tEcPassword = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
