@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(7),
             borderSide: BorderSide(
-              color: Colors.white
+              color: Colors.grey.shade200
             )
           ),
           focusedBorder: OutlineInputBorder(

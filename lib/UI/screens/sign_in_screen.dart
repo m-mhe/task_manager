@@ -10,7 +10,6 @@ class SignInScreen extends StatefulWidget {
 }
 
 class _SignInScreenState extends State<SignInScreen> {
-
   final TextEditingController _tEcEmail = TextEditingController();
   final TextEditingController _tEcPassword = TextEditingController();
 
@@ -18,49 +17,82 @@ class _SignInScreenState extends State<SignInScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: BackgroundWidget(
-        child: SafeArea(
-          child: Padding(
-            padding: EdgeInsets.all(MediaQuery.sizeOf(context).width/10),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text('Get Started With',style: Theme.of(context).textTheme.titleLarge,),
-                SizedBox(height: 20,),
-                TextFormField(
-                  controller: _tEcEmail,
-                  decoration: InputDecoration(
-                    hintText: 'Email',
+        child: SingleChildScrollView(
+          child: SafeArea(
+            child: Padding(
+              padding: EdgeInsets.only(
+                  left: MediaQuery.sizeOf(context).width / 10,
+                  right: MediaQuery.sizeOf(context).width / 10,
+                  top: MediaQuery.sizeOf(context).height / 4),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    'Get Started With',
+                    style: Theme.of(context).textTheme.titleLarge,
                   ),
-                ),
-                SizedBox(height: 10,),
-                TextFormField(
-                  controller: _tEcPassword,
-                  decoration: InputDecoration(
-                    hintText: 'Password',
+                  SizedBox(
+                    height: 20,
                   ),
-                ),
-                SizedBox(height: 20,),
-                ElevatedButton(onPressed: (){}, child: Icon(Icons.arrow_circle_right_outlined)),
-                TextButton(onPressed: (){}, child: Text('Forget Password?', style: Theme.of(context).textTheme.bodySmall,),),
-                RichText(text: TextSpan(
-                  text: "Don't have an account?",
-                  style: Theme.of(context).textTheme.titleSmall,
-                  children: [
-                    TextSpan(
-                      text: 'Sign up',
-                      style: TextStyle(color: Color(0xff21BF73),),
-                      recognizer: TapGestureRecognizer()..onTap = (){},
-                    )
-                  ]
-                ))
-              ],
+                  TextFormField(
+                    controller: _tEcEmail,
+                    decoration: InputDecoration(
+                      hintText: 'Email',
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  TextFormField(
+                    controller: _tEcPassword,
+                    decoration: InputDecoration(
+                      hintText: 'Password',
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  ElevatedButton(
+                      onPressed: () {},
+                      child: Icon(Icons.arrow_circle_right_outlined)),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  TextButton(
+                    onPressed: () {},
+                    child: Text(
+                      'Forget Password?',
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
+                  ),
+                  RichText(
+                    text: TextSpan(
+                      text: "Don't have an account?",
+                      style: Theme.of(context).textTheme.titleSmall,
+                      children: [
+                        TextSpan(
+                          text: ' Sign up',
+                          style: TextStyle(
+                            color: Color(0xff21BF73),
+                          ),
+                          recognizer: TapGestureRecognizer()..onTap = () {},
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                ],
+              ),
             ),
           ),
         ),
       ),
     );
   }
+
   @override
   void dispose() {
     super.dispose();
