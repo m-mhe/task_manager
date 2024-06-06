@@ -31,32 +31,32 @@ class _SignInScreenState extends State<SignInScreen> {
                     'Get Started With',
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   TextFormField(
                     keyboardType: TextInputType.emailAddress,
                     controller: _tEcEmail,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       hintText: 'Email',
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   TextFormField(
                     controller: _tEcPassword,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       hintText: 'Password',
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   ElevatedButton(
                       onPressed: () {},
-                      child: Icon(Icons.arrow_circle_right_outlined)),
-                  SizedBox(
+                      child: const Icon(Icons.arrow_circle_right_outlined)),
+                  const SizedBox(
                     height: 20,
                   ),
                   TextButton(
@@ -73,7 +73,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       children: [
                         TextSpan(
                           text: ' Sign up',
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Color(0xff21BF73),
                           ),
                           recognizer: TapGestureRecognizer()..onTap = () {},
@@ -81,7 +81,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       ],
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                 ],
@@ -99,7 +99,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
   //=======================================================FUNCTIONS=======================================================
   void _onTapEmailVerificationScreen(){
-    Navigator.push(context, MaterialPageRoute(builder: (context)=>EmailForResettingPasswordScreen()));
+    Navigator.push(context, MaterialPageRoute(builder: (context)=>const EmailForResettingPasswordScreen()));
   }
 
   @override

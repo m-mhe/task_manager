@@ -33,14 +33,14 @@ class _PinForResettingPasswordScreenState extends State<PinForResettingPasswordS
                     'PIN Verification',
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),Text(
                     'A six digit verification pin has been send to your email address.',
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.bodySmall,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   PinCodeTextField(
@@ -54,24 +54,24 @@ class _PinForResettingPasswordScreenState extends State<PinForResettingPasswordS
                       fieldWidth: 50,
                       activeFillColor: Colors.white,
                       selectedFillColor: Colors.white,
-                      selectedColor: Color(0xff21BF73),
+                      selectedColor: const Color(0xff21BF73),
                       inactiveColor: Colors.grey,
                       inactiveFillColor: Colors.white
                     ),
-                    animationDuration: Duration(milliseconds: 300),
+                    animationDuration: const Duration(milliseconds: 300),
                     backgroundColor: Colors.transparent,
                     keyboardType: TextInputType.number,
                     enableActiveFill: true,
                     controller: _tEcPin,
                     onCompleted: (v) {},
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   ElevatedButton(
                       onPressed: _onTapSetPasswordScreen,
-                      child: Text('VERIFY')),
-                  SizedBox(
+                      child: const Text('VERIFY')),
+                  const SizedBox(
                     height: 20,
                   ),
                   RichText(
@@ -81,7 +81,7 @@ class _PinForResettingPasswordScreenState extends State<PinForResettingPasswordS
                       children: [
                         TextSpan(
                           text: ' Sign in',
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Color(0xff21BF73),
                           ),
                           recognizer: TapGestureRecognizer()..onTap = _onTapSignInScreen,
@@ -89,7 +89,7 @@ class _PinForResettingPasswordScreenState extends State<PinForResettingPasswordS
                       ],
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                 ],
@@ -106,10 +106,10 @@ class _PinForResettingPasswordScreenState extends State<PinForResettingPasswordS
 
   //=======================================================FUNCTIONS=======================================================
   void _onTapSignInScreen(){
-    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context){return SignInScreen();}), (route){return false;});
+    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context){return const SignInScreen();}), (route){return false;});
   }
   void _onTapSetPasswordScreen(){
-    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>ResetPasswordScreen()));
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const ResetPasswordScreen()));
   }
 
   @override

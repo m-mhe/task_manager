@@ -31,30 +31,30 @@ class _EmailForResettingPasswordScreenState extends State<EmailForResettingPassw
                     'Insert Your Email Address',
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),Text(
                     'A six digit verification pin will be send to your email address.',
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.bodySmall,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   TextFormField(
                     keyboardType: TextInputType.emailAddress,
                     controller: _tEcEmail,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       hintText: 'Email',
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   ElevatedButton(
                       onPressed: _onTapPinVerificationScreen,
-                      child: Icon(Icons.arrow_circle_right_outlined)),
-                  SizedBox(
+                      child: const Icon(Icons.arrow_circle_right_outlined)),
+                  const SizedBox(
                     height: 20,
                   ),
                   RichText(
@@ -64,7 +64,7 @@ class _EmailForResettingPasswordScreenState extends State<EmailForResettingPassw
                       children: [
                         TextSpan(
                           text: ' Sign in',
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Color(0xff21BF73),
                           ),
                           recognizer: TapGestureRecognizer()..onTap = _onTapSignInScreen,
@@ -72,7 +72,7 @@ class _EmailForResettingPasswordScreenState extends State<EmailForResettingPassw
                       ],
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                 ],
@@ -92,7 +92,7 @@ class _EmailForResettingPasswordScreenState extends State<EmailForResettingPassw
     Navigator.pop(context);
   }
   void _onTapPinVerificationScreen(){
-    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context){return PinForResettingPasswordScreen();}));
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context){return const PinForResettingPasswordScreen();}));
   }
 
   @override
