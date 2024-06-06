@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:task_manager/UI/screens/splash_screen.dart';
+import 'package:task_manager/UI/screens/authentication/splash_screen.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
         inputDecorationTheme: InputDecorationTheme(
           fillColor: Colors.grey[200],
           filled: true,
-          hintStyle: TextStyle(color: Colors.grey[400]),
+          hintStyle: TextStyle(color: Colors.grey[500]),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(7),
             borderSide: BorderSide(

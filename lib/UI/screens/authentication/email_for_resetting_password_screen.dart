@@ -1,17 +1,16 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:task_manager/UI/screens/authentication/pin_for_resetting_password_screen.dart';
 import 'package:task_manager/UI/widgets/background_widget.dart';
 
-class SignInScreen extends StatefulWidget {
-  const SignInScreen({super.key});
+class EmailForResettingPasswordScreen extends StatefulWidget {
+  const EmailForResettingPasswordScreen({super.key});
 
   @override
-  State<SignInScreen> createState() => _SignInScreenState();
+  State<EmailForResettingPasswordScreen> createState() => _EmailForResettingPasswordScreenState();
 }
 
-class _SignInScreenState extends State<SignInScreen> {
-  final TextEditingController _tEcEmail = TextEditingController();
-  final TextEditingController _tEcPassword = TextEditingController();
+class _EmailForResettingPasswordScreenState extends State<EmailForResettingPasswordScreen> {
 
   @override
   Widget build(BuildContext context) {
@@ -29,13 +28,21 @@ class _SignInScreenState extends State<SignInScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    'Get Started With',
+                    'Insert Your Email Address',
                     style: Theme.of(context).textTheme.titleLarge,
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),Text(
+                    'A six digit verification pin will be send to your email address.',
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.bodySmall,
                   ),
                   SizedBox(
                     height: 20,
                   ),
                   TextFormField(
+                    keyboardType: TextInputType.emailAddress,
                     controller: _tEcEmail,
                     decoration: InputDecoration(
                       hintText: 'Email',
@@ -44,39 +51,23 @@ class _SignInScreenState extends State<SignInScreen> {
                   SizedBox(
                     height: 10,
                   ),
-                  TextFormField(
-                    controller: _tEcPassword,
-                    decoration: InputDecoration(
-                      hintText: 'Password',
-                    ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
                   ElevatedButton(
-                      onPressed: () {},
+                      onPressed: _onTapPinVerificationScreen,
                       child: Icon(Icons.arrow_circle_right_outlined)),
                   SizedBox(
                     height: 20,
                   ),
-                  TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      'Forget Password?',
-                      style: Theme.of(context).textTheme.bodySmall,
-                    ),
-                  ),
                   RichText(
                     text: TextSpan(
-                      text: "Don't have an account?",
+                      text: "Already have an account?",
                       style: Theme.of(context).textTheme.titleSmall,
                       children: [
                         TextSpan(
-                          text: ' Sign up',
+                          text: ' Sign in',
                           style: TextStyle(
                             color: Color(0xff21BF73),
                           ),
-                          recognizer: TapGestureRecognizer()..onTap = () {},
+                          recognizer: TapGestureRecognizer()..onTap = _onTapSignInScreen,
                         ),
                       ],
                     ),
@@ -93,10 +84,20 @@ class _SignInScreenState extends State<SignInScreen> {
     );
   }
 
+  //=======================================================VARIABLES=======================================================
+  final TextEditingController _tEcEmail = TextEditingController();
+
+  //=======================================================FUNCTIONS=======================================================
+  void _onTapSignInScreen(){
+    Navigator.pop(context);
+  }
+  void _onTapPinVerificationScreen(){
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context){return PinForResettingPasswordScreen();}));
+  }
+
   @override
   void dispose() {
     super.dispose();
     _tEcEmail.dispose();
-    _tEcPassword.dispose();
   }
 }
