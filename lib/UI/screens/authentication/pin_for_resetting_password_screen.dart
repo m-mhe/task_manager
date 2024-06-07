@@ -9,11 +9,12 @@ class PinForResettingPasswordScreen extends StatefulWidget {
   const PinForResettingPasswordScreen({super.key});
 
   @override
-  State<PinForResettingPasswordScreen> createState() => _PinForResettingPasswordScreenState();
+  State<PinForResettingPasswordScreen> createState() =>
+      _PinForResettingPasswordScreenState();
 }
 
-class _PinForResettingPasswordScreenState extends State<PinForResettingPasswordScreen> {
-
+class _PinForResettingPasswordScreenState
+    extends State<PinForResettingPasswordScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,7 +36,8 @@ class _PinForResettingPasswordScreenState extends State<PinForResettingPasswordS
                   ),
                   const SizedBox(
                     height: 10,
-                  ),Text(
+                  ),
+                  Text(
                     'A six digit verification pin has been send to your email address.',
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.bodySmall,
@@ -48,16 +50,15 @@ class _PinForResettingPasswordScreenState extends State<PinForResettingPasswordS
                     length: 6,
                     animationType: AnimationType.fade,
                     pinTheme: PinTheme(
-                      shape: PinCodeFieldShape.box,
-                      borderRadius: BorderRadius.circular(7),
-                      fieldHeight: 50,
-                      fieldWidth: 50,
-                      activeFillColor: Colors.white,
-                      selectedFillColor: Colors.white,
-                      selectedColor: const Color(0xff21BF73),
-                      inactiveColor: Colors.grey,
-                      inactiveFillColor: Colors.white
-                    ),
+                        shape: PinCodeFieldShape.box,
+                        borderRadius: BorderRadius.circular(7),
+                        fieldHeight: 50,
+                        fieldWidth: 50,
+                        activeFillColor: Colors.white,
+                        selectedFillColor: Colors.white,
+                        selectedColor: const Color(0xff21BF73),
+                        inactiveColor: Colors.grey,
+                        inactiveFillColor: Colors.white),
                     animationDuration: const Duration(milliseconds: 300),
                     backgroundColor: Colors.transparent,
                     keyboardType: TextInputType.number,
@@ -84,7 +85,8 @@ class _PinForResettingPasswordScreenState extends State<PinForResettingPasswordS
                           style: const TextStyle(
                             color: Color(0xff21BF73),
                           ),
-                          recognizer: TapGestureRecognizer()..onTap = _onTapSignInScreen,
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = _onTapSignInScreen,
                         ),
                       ],
                     ),
@@ -105,11 +107,17 @@ class _PinForResettingPasswordScreenState extends State<PinForResettingPasswordS
   final TextEditingController _tEcPin = TextEditingController();
 
   //=======================================================FUNCTIONS=======================================================
-  void _onTapSignInScreen(){
-    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context){return const SignInScreen();}), (route){return false;});
+  void _onTapSignInScreen() {
+    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) {
+      return const SignInScreen();
+    }), (route) {
+      return false;
+    });
   }
-  void _onTapSetPasswordScreen(){
-    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const ResetPasswordScreen()));
+
+  void _onTapSetPasswordScreen() {
+    Navigator.pushReplacement(context,
+        MaterialPageRoute(builder: (context) => const ResetPasswordScreen()));
   }
 
   @override

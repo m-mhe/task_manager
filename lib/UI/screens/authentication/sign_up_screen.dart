@@ -11,7 +11,6 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -85,7 +84,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     height: 10,
                   ),
                   ElevatedButton(
-                      onPressed: (){},
+                      onPressed: () {},
                       child: const Icon(Icons.arrow_circle_right_outlined)),
                   const SizedBox(
                     height: 20,
@@ -100,7 +99,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           style: const TextStyle(
                             color: Color(0xff21BF73),
                           ),
-                          recognizer: TapGestureRecognizer()..onTap = _onTapSignInScreen,
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = _onTapSignInScreen,
                         ),
                       ],
                     ),
@@ -125,7 +125,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController _tEcPassword = TextEditingController();
 
   //=======================================================FUNCTIONS=======================================================
-  void _onTapSignInScreen(){
+  void _onTapSignInScreen() {
     Navigator.pop(context);
   }
 

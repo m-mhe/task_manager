@@ -7,11 +7,12 @@ class EmailForResettingPasswordScreen extends StatefulWidget {
   const EmailForResettingPasswordScreen({super.key});
 
   @override
-  State<EmailForResettingPasswordScreen> createState() => _EmailForResettingPasswordScreenState();
+  State<EmailForResettingPasswordScreen> createState() =>
+      _EmailForResettingPasswordScreenState();
 }
 
-class _EmailForResettingPasswordScreenState extends State<EmailForResettingPasswordScreen> {
-
+class _EmailForResettingPasswordScreenState
+    extends State<EmailForResettingPasswordScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +34,8 @@ class _EmailForResettingPasswordScreenState extends State<EmailForResettingPassw
                   ),
                   const SizedBox(
                     height: 10,
-                  ),Text(
+                  ),
+                  Text(
                     'A six digit verification pin will be send to your email address.',
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.bodySmall,
@@ -67,7 +69,8 @@ class _EmailForResettingPasswordScreenState extends State<EmailForResettingPassw
                           style: const TextStyle(
                             color: Color(0xff21BF73),
                           ),
-                          recognizer: TapGestureRecognizer()..onTap = _onTapSignInScreen,
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = _onTapSignInScreen,
                         ),
                       ],
                     ),
@@ -88,11 +91,14 @@ class _EmailForResettingPasswordScreenState extends State<EmailForResettingPassw
   final TextEditingController _tEcEmail = TextEditingController();
 
   //=======================================================FUNCTIONS=======================================================
-  void _onTapSignInScreen(){
+  void _onTapSignInScreen() {
     Navigator.pop(context);
   }
-  void _onTapPinVerificationScreen(){
-    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context){return const PinForResettingPasswordScreen();}));
+
+  void _onTapPinVerificationScreen() {
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
+      return const PinForResettingPasswordScreen();
+    }));
   }
 
   @override

@@ -11,7 +11,6 @@ class ResetPasswordScreen extends StatefulWidget {
 }
 
 class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +32,8 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                   ),
                   const SizedBox(
                     height: 10,
-                  ),Text(
+                  ),
+                  Text(
                     'Minimum length of password should be 8 character, Try to mixed with letter and spacial characters',
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.bodySmall,
@@ -60,8 +60,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                     height: 10,
                   ),
                   ElevatedButton(
-                      onPressed: () {},
-                      child: const Text('CONFIRM')),
+                      onPressed: () {}, child: const Text('CONFIRM')),
                   const SizedBox(
                     height: 20,
                   ),
@@ -75,7 +74,8 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                           style: const TextStyle(
                             color: Color(0xff21BF73),
                           ),
-                          recognizer: TapGestureRecognizer()..onTap = _onTapSignInScreen,
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = _onTapSignInScreen,
                         ),
                       ],
                     ),
@@ -97,8 +97,12 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
   final TextEditingController _tEcPassword = TextEditingController();
 
   //=======================================================FUNCTIONS=======================================================
-  void _onTapSignInScreen(){
-    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context){return const SignInScreen();}), (route){return false;});
+  void _onTapSignInScreen() {
+    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) {
+      return const SignInScreen();
+    }), (route) {
+      return false;
+    });
   }
 
   @override

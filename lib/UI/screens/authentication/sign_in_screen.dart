@@ -76,7 +76,8 @@ class _SignInScreenState extends State<SignInScreen> {
                           style: const TextStyle(
                             color: Color(0xff21BF73),
                           ),
-                          recognizer: TapGestureRecognizer()..onTap = _onTapSignUpScreen,
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = _onTapSignUpScreen,
                         ),
                       ],
                     ),

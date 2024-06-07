@@ -1,4 +1,4 @@
-class AssetsPath{
+class AssetsPath {
   static const String _allAssets = 'assets';
   static const String _imgAssets = '$_allAssets/img';
 

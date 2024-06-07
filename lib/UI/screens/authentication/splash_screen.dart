@@ -31,6 +31,7 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     _waitThenMoveToNextScreen();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
