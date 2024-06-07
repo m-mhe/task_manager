@@ -34,7 +34,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     height: 20,
                   ),
                   TextFormField(
-                    keyboardType: TextInputType.emailAddress,
                     controller: _tEcFName,
                     decoration: const InputDecoration(
                       hintText: 'First Name',
@@ -44,7 +43,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     height: 10,
                   ),
                   TextFormField(
-                    keyboardType: TextInputType.emailAddress,
                     controller: _tEcLName,
                     decoration: const InputDecoration(
                       hintText: 'Last Name',
@@ -54,7 +52,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     height: 10,
                   ),
                   TextFormField(
-                    keyboardType: TextInputType.emailAddress,
+                    keyboardType: TextInputType.number,
                     controller: _tEcMobile,
                     decoration: const InputDecoration(
                       hintText: 'Mobile Number',
@@ -74,7 +72,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     height: 10,
                   ),
                   TextFormField(
-                    keyboardType: TextInputType.emailAddress,
                     controller: _tEcPassword,
                     decoration: const InputDecoration(
                       hintText: 'Password',
