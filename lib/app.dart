@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Task Manager',
       theme: ThemeData(
-        textTheme: TextTheme(
+        textTheme: const TextTheme(
           titleLarge: TextStyle(
             fontWeight: FontWeight.w800,
             fontSize: 28,
@@ -39,16 +39,16 @@ class MyApp extends StatelessWidget {
           ),
           focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(7),
-              borderSide: BorderSide(
+              borderSide: const BorderSide(
                   color: Colors.white
               )
           ),
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
-            backgroundColor: Color(0xff21BF73),
+            backgroundColor: const Color(0xff21BF73),
             foregroundColor: Colors.white,
-            fixedSize: Size.fromWidth(double.maxFinite),
+            fixedSize: const Size.fromWidth(double.maxFinite),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(7)
             )

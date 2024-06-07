@@ -1,17 +1,17 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:task_manager/UI/screens/authentication/email_for_resetting_password_screen.dart';
-import 'package:task_manager/UI/screens/authentication/sign_up_screen.dart';
+import 'package:task_manager/UI/screens/authentication/pin_for_resetting_password_screen.dart';
 import 'package:task_manager/UI/widgets/background_widget.dart';
 
-class SignInScreen extends StatefulWidget {
-  const SignInScreen({super.key});
+class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({super.key});
 
   @override
-  State<SignInScreen> createState() => _SignInScreenState();
+  State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _SignInScreenState extends State<SignInScreen> {
+class _SignUpScreenState extends State<SignUpScreen> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,17 +22,47 @@ class _SignInScreenState extends State<SignInScreen> {
               padding: EdgeInsets.only(
                   left: MediaQuery.sizeOf(context).width / 10,
                   right: MediaQuery.sizeOf(context).width / 10,
-                  top: MediaQuery.sizeOf(context).height / 4),
+                  top: MediaQuery.sizeOf(context).height / 6),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    'Get Started With',
+                    'Join With Us',
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
                   const SizedBox(
                     height: 20,
+                  ),
+                  TextFormField(
+                    keyboardType: TextInputType.emailAddress,
+                    controller: _tEcFName,
+                    decoration: const InputDecoration(
+                      hintText: 'First Name',
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  TextFormField(
+                    keyboardType: TextInputType.emailAddress,
+                    controller: _tEcLName,
+                    decoration: const InputDecoration(
+                      hintText: 'Last Name',
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  TextFormField(
+                    keyboardType: TextInputType.emailAddress,
+                    controller: _tEcMobile,
+                    decoration: const InputDecoration(
+                      hintText: 'Mobile Number',
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
                   ),
                   TextFormField(
                     keyboardType: TextInputType.emailAddress,
@@ -45,6 +75,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     height: 10,
                   ),
                   TextFormField(
+                    keyboardType: TextInputType.emailAddress,
                     controller: _tEcPassword,
                     decoration: const InputDecoration(
                       hintText: 'Password',
@@ -54,29 +85,22 @@ class _SignInScreenState extends State<SignInScreen> {
                     height: 10,
                   ),
                   ElevatedButton(
-                      onPressed: () {},
+                      onPressed: (){},
                       child: const Icon(Icons.arrow_circle_right_outlined)),
                   const SizedBox(
                     height: 20,
                   ),
-                  TextButton(
-                    onPressed: _onTapEmailVerificationScreen,
-                    child: Text(
-                      'Forget Password?',
-                      style: Theme.of(context).textTheme.bodySmall,
-                    ),
-                  ),
                   RichText(
                     text: TextSpan(
-                      text: "Don't have an account?",
+                      text: "Already have an account?",
                       style: Theme.of(context).textTheme.titleSmall,
                       children: [
                         TextSpan(
-                          text: ' Sign up',
+                          text: ' Sign in',
                           style: const TextStyle(
                             color: Color(0xff21BF73),
                           ),
-                          recognizer: TapGestureRecognizer()..onTap = _onTapSignUpScreen,
+                          recognizer: TapGestureRecognizer()..onTap = _onTapSignInScreen,
                         ),
                       ],
                     ),
@@ -95,25 +119,14 @@ class _SignInScreenState extends State<SignInScreen> {
 
   //=======================================================VARIABLES=======================================================
   final TextEditingController _tEcEmail = TextEditingController();
+  final TextEditingController _tEcFName = TextEditingController();
+  final TextEditingController _tEcLName = TextEditingController();
+  final TextEditingController _tEcMobile = TextEditingController();
   final TextEditingController _tEcPassword = TextEditingController();
 
   //=======================================================FUNCTIONS=======================================================
-  void _onTapEmailVerificationScreen() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => const EmailForResettingPasswordScreen(),
-      ),
-    );
-  }
-
-  void _onTapSignUpScreen() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => const SignUpScreen(),
-      ),
-    );
+  void _onTapSignInScreen(){
+    Navigator.pop(context);
   }
 
   @override
@@ -121,5 +134,8 @@ class _SignInScreenState extends State<SignInScreen> {
     super.dispose();
     _tEcEmail.dispose();
     _tEcPassword.dispose();
+    _tEcFName.dispose();
+    _tEcLName.dispose();
+    _tEcMobile.dispose();
   }
 }
