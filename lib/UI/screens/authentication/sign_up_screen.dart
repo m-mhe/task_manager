@@ -27,6 +27,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
+                    textAlign: TextAlign.center,
                     'Join With Us',
                     style: Theme.of(context).textTheme.titleLarge,
                   ),

@@ -29,6 +29,7 @@ class _EmailForResettingPasswordScreenState
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
+                    textAlign: TextAlign.center,
                     'Insert Your Email Address',
                     style: Theme.of(context).textTheme.titleLarge,
                   ),

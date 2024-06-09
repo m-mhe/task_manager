@@ -31,6 +31,7 @@ class _PinForResettingPasswordScreenState
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
+                    textAlign: TextAlign.center,
                     'PIN Verification',
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
@@ -51,9 +52,9 @@ class _PinForResettingPasswordScreenState
                     animationType: AnimationType.fade,
                     pinTheme: PinTheme(
                         shape: PinCodeFieldShape.box,
-                        borderRadius: BorderRadius.circular(7),
-                        fieldHeight: 50,
-                        fieldWidth: 50,
+                        borderRadius: BorderRadius.circular(5),
+                        fieldHeight: MediaQuery.sizeOf(context).width/9,
+                        fieldWidth: MediaQuery.sizeOf(context).width/9,
                         activeFillColor: Colors.white,
                         selectedFillColor: Colors.white,
                         selectedColor: const Color(0xff21BF73),
@@ -108,11 +109,7 @@ class _PinForResettingPasswordScreenState
 
   //=======================================================FUNCTIONS=======================================================
   void _onTapSignInScreen() {
-    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) {
-      return const SignInScreen();
-    }), (route) {
-      return false;
-    });
+    Navigator.pop(context);
   }
 
   void _onTapSetPasswordScreen() {

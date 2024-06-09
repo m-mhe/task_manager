@@ -28,6 +28,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
+                    textAlign: TextAlign.center,
                     'Get Started With',
                     style: Theme.of(context).textTheme.titleLarge,
                   ),

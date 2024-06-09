@@ -27,6 +27,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
+                    textAlign: TextAlign.center,
                     'Set New Password',
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
@@ -98,11 +99,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
 
   //=======================================================FUNCTIONS=======================================================
   void _onTapSignInScreen() {
-    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) {
-      return const SignInScreen();
-    }), (route) {
-      return false;
-    });
+    Navigator.pop(context);
   }
 
   @override
