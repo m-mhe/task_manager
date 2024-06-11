@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
             headlineLarge: TextStyle(
               color: Colors.black87,
               fontWeight: FontWeight.w600,
-              fontSize: 20,
+              fontSize: 18,
             ),
             headlineMedium: TextStyle(
               color: Colors.black87,
