@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:task_manager/UI/screens/authentication/email_for_resetting_password_screen.dart';
 import 'package:task_manager/UI/screens/authentication/sign_up_screen.dart';
 import 'package:task_manager/UI/widgets/background_widget.dart';
+import 'package:task_manager/UI/widgets/bottom_navigation_bar.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
@@ -55,7 +56,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     height: 10,
                   ),
                   ElevatedButton(
-                      onPressed: () {},
+                      onPressed: _onTapNewTaskScreen,
                       child: const Icon(Icons.arrow_circle_right_outlined)),
                   const SizedBox(
                     height: 20,
@@ -114,6 +115,15 @@ class _SignInScreenState extends State<SignInScreen> {
       context,
       MaterialPageRoute(
         builder: (context) => const SignUpScreen(),
+      ),
+    );
+  }
+
+  void _onTapNewTaskScreen() {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const BottomNavBar(),
       ),
     );
   }
