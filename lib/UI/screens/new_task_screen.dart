@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:task_manager/UI/screens/add_task_screen.dart';
 import 'package:task_manager/UI/widgets/background_widget.dart';
 import 'package:task_manager/UI/widgets/task_item.dart';
 
@@ -47,8 +48,13 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(onPressed: (){}, child: Icon(Icons.add),),
+      floatingActionButton: FloatingActionButton(onPressed: _onPressAddTaskScreen, child: Icon(Icons.add),),
     );
+  }
+
+  //=======================================================FUNCTIONS=======================================================
+  void _onPressAddTaskScreen(){
+    Navigator.push(context, MaterialPageRoute(builder: (context)=>AddTaskScreen(),),);
   }
 
   Widget _summaryCard({required String number, required String title}) {
