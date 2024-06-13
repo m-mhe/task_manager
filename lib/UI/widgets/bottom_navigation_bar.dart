@@ -26,7 +26,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: profileAppBar(),
+      appBar: profileAppBar(context),
       body: _screens[_screenIndex],
       bottomNavigationBar: BottomNavigationBar(
         onTap: (i){
