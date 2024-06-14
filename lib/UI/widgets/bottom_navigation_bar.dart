@@ -3,7 +3,6 @@ import 'package:task_manager/UI/screens/canceled_task_screen.dart';
 import 'package:task_manager/UI/screens/completed_task_screen.dart';
 import 'package:task_manager/UI/screens/new_task_screen.dart';
 import 'package:task_manager/UI/screens/progress_task_screen.dart';
-import 'package:task_manager/UI/widgets/background_widget.dart';
 import 'package:task_manager/UI/widgets/profile_app_bar.dart';
 
 class BottomNavBar extends StatefulWidget {

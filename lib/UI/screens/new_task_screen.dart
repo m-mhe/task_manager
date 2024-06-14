@@ -57,6 +57,7 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
     Navigator.push(context, MaterialPageRoute(builder: (context)=>AddTaskScreen(),),);
   }
 
+  //=======================================================WIDGETS=======================================================
   Widget _summaryCard({required String number, required String title}) {
     return Card(
       color: Colors.white,
