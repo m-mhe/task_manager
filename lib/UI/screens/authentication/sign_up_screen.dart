@@ -131,15 +131,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         return null;
                       },
                       decoration: InputDecoration(
-                          hintText: 'Password',
-                          suffixIcon: IconButton(
-                            onPressed: () {
-                              setState(() {
-                                _hidePass = !_hidePass;
-                              });
-                            },
-                            icon: _hidePass?const Icon(Icons.visibility_off): const Icon(Icons.visibility),
-                          ),),
+                        hintText: 'Password',
+                        suffixIcon: IconButton(
+                          onPressed: () {
+                            setState(() {
+                              _hidePass = !_hidePass;
+                            });
+                          },
+                          icon: _hidePass
+                              ? const Icon(Icons.visibility_off)
+                              : const Icon(Icons.visibility),
+                        ),
+                      ),
                     ),
                     const SizedBox(
                       height: 10,
@@ -227,7 +230,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
     ApiResponse serverResponse =
         await ApiCall.postResponse(URLList.registrationURL, userRegInfo);
     if (serverResponse.isSuccess == true && mounted) {
-      bottomPopUpMessage(context, 'Registration Success!', showError: false);
+      bottomPopUpMessage(context,
+          "REGISTRATION ${serverResponse.responseData.values.toList()[0].toString().toUpperCase()}!",
+          showError: false);
       Navigator.pop(context);
     } else {
       if (mounted) {
@@ -236,13 +241,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
             serverResponse.errorMessage ??
                 'Registration failed! Please try again.');
       }
-    }
-    if (mounted) {
-      setState(
-        () {
-          _registrationInProgress = false;
-        },
-      );
     }
   }
 
