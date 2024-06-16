@@ -52,6 +52,13 @@ class MyApp extends StatelessWidget {
           focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(7),
               borderSide: const BorderSide(color: Colors.white)),
+          errorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(7),
+              borderSide: const BorderSide(color: Colors.red, width: 2),
+          ),
+          focusedErrorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(7),
+              borderSide: BorderSide(color: Colors.red),),
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(

@@ -30,7 +30,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 children: [
                   Text(
                     textAlign: TextAlign.center,
-                    'Get Started With',
+                    'Sign In',
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
                   const SizedBox(
