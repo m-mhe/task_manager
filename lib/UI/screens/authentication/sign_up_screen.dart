@@ -1,7 +1,5 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:task_manager/UI/screens/authentication/pin_for_resetting_password_screen.dart';
 import 'package:task_manager/UI/utility/URLList.dart';
 import 'package:task_manager/UI/utility/validator.dart';
 import 'package:task_manager/UI/widgets/background_widget.dart';
@@ -161,7 +159,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 child: CircularProgressIndicator(
                                   color: Colors.white,
                                 )),
-                            child: Icon(
+                            child: const Icon(
                               Icons.arrow_circle_right_outlined,
                             ))),
                     const SizedBox(

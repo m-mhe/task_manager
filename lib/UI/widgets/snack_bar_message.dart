@@ -7,7 +7,7 @@ void bottomPopUpMessage(BuildContext context, String message,
       content: Text(
         message,
         textAlign: TextAlign.center,
-        style: TextStyle(color: Colors.white),
+        style: const TextStyle(color: Colors.white),
       ),
       backgroundColor: showError ? Colors.red : Colors.green,
     ),
