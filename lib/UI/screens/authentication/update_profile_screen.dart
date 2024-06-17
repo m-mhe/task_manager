@@ -23,7 +23,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
               padding: EdgeInsets.only(
                   left: MediaQuery.sizeOf(context).width / 10,
                   right: MediaQuery.sizeOf(context).width / 10,
-                  top: MediaQuery.sizeOf(context).height / 6),
+                  top: MediaQuery.sizeOf(context).height / 9),
               child: Form(
                 key: _formKeyUpdateProfile,
                 child: Column(

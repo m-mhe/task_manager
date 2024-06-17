@@ -84,7 +84,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         }
                         if (Validator.mobileNumberValidator.hasMatch(v) ==
                             false) {
-                          return 'Please a valid Mobile Number';
+                          return 'Please enter a valid Mobile Number';
                         }
                         return null;
                       },
@@ -104,7 +104,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           return 'Please enter your Email Address';
                         }
                         if (Validator.emailValidator.hasMatch(v) == false) {
-                          return 'Please a valid Email Address';
+                          return 'Please enter a valid Email Address';
                         }
                         return null;
                       },
@@ -145,23 +145,25 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     const SizedBox(
                       height: 10,
                     ),
-                    ElevatedButton(
-                        onPressed: () {
-                          if (_formKey.currentState!.validate()) {
-                            _registerUserInputToServer();
-                          }
-                        },
-                        child: Visibility(
-                            visible: _registrationInProgress == false,
-                            replacement: const SizedBox(
-                                height: 20,
-                                width: 20,
-                                child: CircularProgressIndicator(
-                                  color: Colors.white,
-                                )),
-                            child: const Icon(
-                              Icons.arrow_circle_right_outlined,
-                            ))),
+                    Visibility(
+                      visible: !_registrationInProgress,
+                      replacement: const SizedBox(
+                        height: 25,
+                        width: 25,
+                        child: CircularProgressIndicator(
+                          color: Color(0xff21BF73),
+                        ),
+                      ),
+                      child: ElevatedButton(
+                          onPressed: () {
+                            if (_formKey.currentState!.validate()) {
+                              _registerUserInputToServer();
+                            }
+                          },
+                          child: const Icon(
+                            Icons.arrow_circle_right_outlined,
+                          )),
+                    ),
                     const SizedBox(
                       height: 20,
                     ),
@@ -211,11 +213,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   Future<void> _registerUserInputToServer() async {
     if (mounted) {
-      setState(
-        () {
-          _registrationInProgress = true;
-        },
-      );
+      setState(() {
+        _registrationInProgress = true;
+      });
     }
     Map<String, String> userRegInfo = {
       "email": _tEcEmail.text,
@@ -229,15 +229,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
         await ApiCall.postResponse(URLList.registrationURL, userRegInfo);
     if (serverResponse.isSuccess == true && mounted) {
       bottomPopUpMessage(context,
-          "REGISTRATION ${serverResponse.responseData.values.toList()[0].toString().toUpperCase()}!",
+          "Registration ${serverResponse.responseData.values.toList()[0].toString().toUpperCase()}!",
           showError: false);
+      setState(() {
+        _registrationInProgress = false;
+      });
+      await Future.delayed(Duration(seconds: 1));
       Navigator.pop(context);
     } else {
       if (mounted) {
-        bottomPopUpMessage(
-            context,
-            serverResponse.errorMessage ??
-                'Registration failed! Please try again.');
+        bottomPopUpMessage(context, 'Registration failed! Please try again.',
+            showError: true);
+        await Future.delayed(Duration(seconds: 2));
+        setState(() {
+          _registrationInProgress = false;
+        });
       }
     }
   }
