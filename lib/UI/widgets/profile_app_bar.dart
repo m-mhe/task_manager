@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:task_manager/UI/screens/authentication/sign_in_screen.dart';
 import 'package:task_manager/UI/screens/authentication/update_profile_screen.dart';
-import 'package:task_manager/UI/widgets/network_image.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 AppBar profileAppBar(context, [bool isItUpdateProfileScreen = false]){
   return AppBar(
@@ -9,7 +10,7 @@ AppBar profileAppBar(context, [bool isItUpdateProfileScreen = false]){
         if(isItUpdateProfileScreen == true){
           return;
         }
-        Navigator.push(context, MaterialPageRoute(builder: (context)=>UpdateProfileScreen()));
+        Navigator.push(context, MaterialPageRoute(builder: (context)=>const UpdateProfileScreen()));
       },
       child: Padding(
         padding: const EdgeInsets.only(left: 15),
@@ -28,7 +29,7 @@ AppBar profileAppBar(context, [bool isItUpdateProfileScreen = false]){
         if(isItUpdateProfileScreen == true){
           return;
         }
-        Navigator.push(context, MaterialPageRoute(builder: (context)=>UpdateProfileScreen()));
+        Navigator.push(context, MaterialPageRoute(builder: (context)=>const UpdateProfileScreen()));
       },
       child: const Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -39,7 +40,11 @@ AppBar profileAppBar(context, [bool isItUpdateProfileScreen = false]){
       ),
     ),
     actions: [
-      IconButton(onPressed: (){}, icon: Icon(Icons.logout))
+      IconButton(onPressed: () async{
+        SharedPreferences forDelete = await SharedPreferences.getInstance();
+        await forDelete.clear();
+        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>const SignInScreen()), (route)=>false);
+      }, icon: const Icon(Icons.logout))
     ],
   );
 

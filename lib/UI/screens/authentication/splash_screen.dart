@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:task_manager/UI/screens/authentication/sign_in_screen.dart';
 import 'package:task_manager/UI/utility/assets_path.dart';
+import 'package:task_manager/UI/widgets/snack_bar_message.dart';
+import 'package:task_manager/data/controller/authentication_controller.dart';
 
+import '../../widgets/bottom_navigation_bar.dart';
 import '../../widgets/intro_background_Widget.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -13,13 +16,16 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   Future<void> _waitThenMoveToNextScreen() async {
-    await Future.delayed(const Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 1));
+    bool isUserLogedIn =
+        await AuthenticationController.checkIfUserLogedInOrNot();
     if (mounted) {
+      if(isUserLogedIn==true) bottomPopUpMessage(context, 'You are Signed In!', showError: false);
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
           builder: (context) {
-            return const SignInScreen();
+            return isUserLogedIn ? const BottomNavBar() : const SignInScreen();
           },
         ),
       );

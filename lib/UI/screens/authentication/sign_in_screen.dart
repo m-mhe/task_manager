@@ -7,7 +7,9 @@ import 'package:task_manager/UI/utility/validator.dart';
 import 'package:task_manager/UI/widgets/background_widget.dart';
 import 'package:task_manager/UI/widgets/bottom_navigation_bar.dart';
 import 'package:task_manager/UI/widgets/snack_bar_message.dart';
+import 'package:task_manager/data/controller/authentication_controller.dart';
 import 'package:task_manager/data/model/api_response.dart';
+import 'package:task_manager/data/model/log_in_model.dart';
 import 'package:task_manager/data/network_caller/api_call.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -150,6 +152,9 @@ class _SignInScreenState extends State<SignInScreen> {
         await ApiCall.postResponse(URLList.logInURL, userSignInData);
     if (getServerResponse.isSuccess == true) {
       if (mounted) {
+        LogInModel logInModel = LogInModel.fromJson(getServerResponse.responseData);
+        await AuthenticationController.saveLogInToken(logInModel.token!);
+        await AuthenticationController.saveUserData(logInModel.data!);
         bottomPopUpMessage(
           context,
           'Sign In Success!',
