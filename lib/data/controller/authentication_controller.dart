@@ -34,11 +34,11 @@ class AuthenticationController{
     return userdata;
   }
   static Future<bool> checkIfUserLogedInOrNot() async{
-    String? tokenDta = await getLogInToken();
-    if(tokenDta == null){
+    String? tokenData = await getLogInToken();
+    if(tokenData == null){
       return false;
     }else{
-      accessToken = tokenDta;
+      accessToken = tokenData;
       userData = await getUserData();
       return true;
     }

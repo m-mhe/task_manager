@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:task_manager/UI/screens/authentication/sign_in_screen.dart';
 import 'package:task_manager/UI/screens/authentication/update_profile_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:task_manager/data/controller/authentication_controller.dart';
 
 AppBar profileAppBar(context, [bool isItUpdateProfileScreen = false]){
   return AppBar(
@@ -31,11 +32,11 @@ AppBar profileAppBar(context, [bool isItUpdateProfileScreen = false]){
         }
         Navigator.push(context, MaterialPageRoute(builder: (context)=>const UpdateProfileScreen()));
       },
-      child: const Column(
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Muhammad Emon', style: TextStyle(fontSize: 18),),
-          Text('mominhasanemon@gmail.com', style: TextStyle(fontSize: 12,fontWeight: FontWeight.w500),)
+          Text(((AuthenticationController.userData!.firstName??'')+' '+(AuthenticationController.userData!.lastName??'')), style: const TextStyle(fontSize: 18),),
+          Text(AuthenticationController.userData!.email??'', style: const TextStyle(fontSize: 12,fontWeight: FontWeight.w500),)
         ],
       ),
     ),

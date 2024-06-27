@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../widgets/background_widget.dart';
-import '../widgets/task_item.dart';
+import '../widgets/new_task_item.dart';
 
 class ProgressTaskScreen extends StatefulWidget {
   const ProgressTaskScreen({super.key});
@@ -16,7 +16,7 @@ class _ProgressTaskScreenState extends State<ProgressTaskScreen> {
       body: BackgroundWidget(
         child: Padding(
           padding: EdgeInsets.only(left: 15, top: 10, right: 15, bottom: 10),
-          child: TaskItem(
+          child: NewTaskItem(
             child: Container(
               width: 100,
               decoration: BoxDecoration(

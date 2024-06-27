@@ -1,11 +1,12 @@
 import 'dart:convert';
 import 'package:http/http.dart';
+import 'package:task_manager/data/controller/authentication_controller.dart';
 import 'package:task_manager/data/model/api_response.dart';
 
 class ApiCall {
   static Future<ApiResponse> getResponse(String url) async {
     try {
-      Response serverResponse = await get(Uri.parse(url));
+      Response serverResponse = await get(Uri.parse(url),headers: {'token':AuthenticationController.accessToken});
       if (serverResponse.statusCode == 200) {
         final dynamic serverResponseData = jsonDecode(serverResponse.body);
         return ApiResponse(
@@ -28,7 +29,7 @@ class ApiCall {
     try {
       Response serverResponse = await post(Uri.parse(url),
           body: jsonEncode(body),
-          headers: {'content-type': 'application/json'});
+          headers: {'token':AuthenticationController.accessToken});
       if (serverResponse.statusCode == 200 ||
           serverResponse.statusCode == 201) {
         final dynamic serverResponseData = jsonDecode(serverResponse.body);

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:task_manager/UI/screens/add_task_screen.dart';
 import 'package:task_manager/UI/widgets/background_widget.dart';
-import 'package:task_manager/UI/widgets/task_item.dart';
+
+import '../widgets/new_task_item.dart';
 
 class NewTaskScreen extends StatefulWidget {
   const NewTaskScreen({super.key});
@@ -32,7 +33,7 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
                 ),
               ),
               SizedBox(height: 7,),
-              Expanded(child: TaskItem(child: Container(
+              Expanded(child: NewTaskItem(child: Container(
                 width: 100,
                 decoration: BoxDecoration(
                     color: Colors.lightBlue,

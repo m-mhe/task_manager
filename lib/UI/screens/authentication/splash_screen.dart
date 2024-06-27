@@ -20,7 +20,9 @@ class _SplashScreenState extends State<SplashScreen> {
     bool isUserLogedIn =
         await AuthenticationController.checkIfUserLogedInOrNot();
     if (mounted) {
-      if(isUserLogedIn==true) bottomPopUpMessage(context, 'You are Signed In!', showError: false);
+      if(isUserLogedIn==true) {
+        bottomPopUpMessage(context, 'You are Signed In!', showError: false);
+      }
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
