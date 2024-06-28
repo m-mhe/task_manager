@@ -17,7 +17,8 @@ class _CanceledTaskScreenState extends State<CanceledTaskScreen> {
       body: BackgroundWidget(
         child: Padding(
           padding: EdgeInsets.only(left: 15, top: 10, right: 15, bottom: 10),
-          child: NewTaskItem(child: Container(
+          child: NewTaskItem(newTaskListModel: [],
+          child: Container(
             width: 100,
             decoration: BoxDecoration(
                 color: Colors.red,

@@ -111,7 +111,8 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                           } else {
                             if (mounted) {
                               setState(() {
-                                bottomPopUpMessage(context, 'Error occurred while adding a new task. Check internet connection and try again',
+                                bottomPopUpMessage(context,
+                                    'Error occurred while adding a new task. Check internet connection and try again',
                                     showError: true);
                                 _notLoading = true;
                               });

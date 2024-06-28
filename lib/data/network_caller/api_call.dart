@@ -29,7 +29,7 @@ class ApiCall {
     try {
       Response serverResponse = await post(Uri.parse(url),
           body: jsonEncode(body),
-          headers: {'token':AuthenticationController.accessToken});
+          headers: {'content-type':'application/json','token':AuthenticationController.accessToken});
       if (serverResponse.statusCode == 200 ||
           serverResponse.statusCode == 201) {
         final dynamic serverResponseData = jsonDecode(serverResponse.body);
