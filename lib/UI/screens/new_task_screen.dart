@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:task_manager/UI/screens/add_task_screen.dart';
 import 'package:task_manager/UI/widgets/background_widget.dart';
 
-import '../../data/controller/new_task_controller.dart';
+import '../../data/controller/task_controller.dart';
 import '../../data/model/api_response.dart';
-import '../../data/model/saved_user_new_task_data.dart';
+import '../../data/model/saved_user_task_data.dart';
 import '../../data/network_caller/api_call.dart';
 import '../utility/URLList.dart';
-import '../widgets/new_task_item.dart';
+import '../widgets/task_item.dart';
 import '../widgets/snack_bar_message.dart';
 
 class NewTaskScreen extends StatefulWidget {
@@ -18,8 +18,8 @@ class NewTaskScreen extends StatefulWidget {
 }
 
 class _NewTaskScreenState extends State<NewTaskScreen> {
-  List<SavedUserNewTaskData> newTaskList = [];
-  bool loading = false;
+  List<SavedUserTaskData> _newTaskList = [];
+  bool _loading = false;
 
   @override
   initState() {
@@ -33,7 +33,7 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
         color: Color(0xff21BF73),
         onRefresh: _getSomeNewTask,
         child: Visibility(
-          visible: loading==false,
+          visible: _loading==false,
           replacement: Center(child: CircularProgressIndicator(color: Color(0xff21BF73),),),
           child: BackgroundWidget(
             child: Padding(
@@ -53,7 +53,7 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
                     ),
                   ),
                   SizedBox(height: 7,),
-                  Expanded(child: NewTaskItem(newTaskListModel: newTaskList,
+                  Expanded(child: NewTaskItem(taskListModel: _newTaskList.reversed.toList(),
                   child: Container(
                     width: 100,
                     decoration: BoxDecoration(
@@ -83,16 +83,16 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
   Future<void> _getSomeNewTask() async{
     if(mounted){
       setState(() {
-        loading = true;
+        _loading = true;
       });
     }
     ApiResponse getDataFromServer = await ApiCall.getResponse(URLList.getNewTask);
     if(getDataFromServer.isSuccess && mounted){
       bottomPopUpMessage(context, 'Loading Success!', showError: false);
-      NewTaskModelWrapper newTaskModelWrapper = NewTaskModelWrapper.fromJson(getDataFromServer.responseData);
-      newTaskList = newTaskModelWrapper.data??[];
+      TaskModelWrapper newTaskModelWrapper = TaskModelWrapper.fromJson(getDataFromServer.responseData);
+      _newTaskList = newTaskModelWrapper.data??[];
       setState(() {
-        loading = false;
+        _loading = false;
       });
     }else{
       if(mounted){

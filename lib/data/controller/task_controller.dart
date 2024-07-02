@@ -1,17 +1,17 @@
-import '../model/saved_user_new_task_data.dart';
+import '../model/saved_user_task_data.dart';
 
-class NewTaskModelWrapper {
+class TaskModelWrapper {
   String? status;
-  List<SavedUserNewTaskData>? data;
+  List<SavedUserTaskData>? data;
 
-  NewTaskModelWrapper({this.status, this.data});
+  TaskModelWrapper({this.status, this.data});
 
-  NewTaskModelWrapper.fromJson(Map<String, dynamic> json) {
+  TaskModelWrapper.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     if (json['data'] != null) {
-      data = <SavedUserNewTaskData>[];
+      data = <SavedUserTaskData>[];
       json['data'].forEach((v) {
-        data!.add(SavedUserNewTaskData.fromJson(v));
+        data!.add(SavedUserTaskData.fromJson(v));
       });
     }
   }

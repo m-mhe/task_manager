@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
 import 'package:task_manager/UI/widgets/background_widget.dart';
 import 'package:task_manager/UI/widgets/profile_app_bar.dart';
 import 'package:task_manager/UI/widgets/snack_bar_message.dart';
-import 'package:task_manager/data/controller/authentication_controller.dart';
 import 'package:task_manager/data/model/api_response.dart';
 import 'package:task_manager/data/network_caller/api_call.dart';
 
 import '../utility/URLList.dart';
+import '../widgets/bottom_navigation_bar.dart';
 
 class AddTaskScreen extends StatefulWidget {
   const AddTaskScreen({super.key});
@@ -98,16 +97,11 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                           ApiResponse getResponseFromTheServer =
                               await ApiCall.postResponse(
                                   URLList.createTask, userResponse);
-                          if (getResponseFromTheServer.isSuccess) {
+                          if (getResponseFromTheServer.isSuccess && mounted) {
                             _tEcDescription.clear();
                             _tEcSubject.clear();
-                            if (mounted) {
-                              setState(() {
-                                bottomPopUpMessage(context, 'A New Task Added!',
-                                    showError: false);
-                                _notLoading = true;
-                              });
-                            }
+                            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>const BottomNavBar()), (route)=>false);
+                            bottomPopUpMessage(context, 'A New Task Added!', showError: false);
                           } else {
                             if (mounted) {
                               setState(() {

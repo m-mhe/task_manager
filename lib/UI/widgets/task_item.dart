@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:task_manager/UI/widgets/snack_bar_message.dart';
-import 'package:task_manager/data/controller/new_task_controller.dart';
+import 'package:task_manager/data/controller/task_controller.dart';
 import 'package:task_manager/data/model/api_response.dart';
 import 'package:task_manager/data/network_caller/api_call.dart';
 
-import '../../data/model/saved_user_new_task_data.dart';
+import '../../data/model/saved_user_task_data.dart';
 import '../utility/URLList.dart';
 
 class NewTaskItem extends StatefulWidget {
-  const NewTaskItem({super.key, required this.child, required this.newTaskListModel});
+  const NewTaskItem({super.key, required this.child, required this.taskListModel});
   final Widget child;
-  final List<SavedUserNewTaskData> newTaskListModel;
+  final List<SavedUserTaskData> taskListModel;
 
   @override
   State<NewTaskItem> createState() => _NewTaskItemState();
@@ -20,7 +20,7 @@ class _NewTaskItemState extends State<NewTaskItem> {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: widget.newTaskListModel.length,
+      itemCount: widget.taskListModel.length,
       itemBuilder: (context, i) {
         return Card(
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(7)),
@@ -33,19 +33,19 @@ class _NewTaskItemState extends State<NewTaskItem> {
               children: [
                 Text(
                     style: Theme.of(context).textTheme.headlineMedium,
-                    widget.newTaskListModel[i].title??''),
+                    widget.taskListModel[i].title??''),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 10),
                   child: Text(
                     textAlign: TextAlign.justify,
                       style: Theme.of(context).textTheme.headlineSmall,
-                      widget.newTaskListModel[i].description??''),
+                      widget.taskListModel[i].description??''),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(bottom: 10),
                   child: Text(
                       style: Theme.of(context).textTheme.bodySmall,
-                      widget.newTaskListModel[i].createdDate??''),
+                      widget.taskListModel[i].createdDate??''),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

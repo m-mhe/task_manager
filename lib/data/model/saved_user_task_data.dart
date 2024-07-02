@@ -1,13 +1,13 @@
-class SavedUserNewTaskData {
+class SavedUserTaskData {
   String? sId;
   String? title;
   String? description;
   String? status;
   String? createdDate;
 
-  SavedUserNewTaskData({this.sId, this.title, this.description, this.status, this.createdDate});
+  SavedUserTaskData({this.sId, this.title, this.description, this.status, this.createdDate});
 
-  SavedUserNewTaskData.fromJson(Map<String, dynamic> json) {
+  SavedUserTaskData.fromJson(Map<String, dynamic> json) {
     sId = json['_id'];
     title = json['title'];
     description = json['description'];

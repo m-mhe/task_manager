@@ -5,4 +5,5 @@ class URLList{
   static const String createTask = '$_baseURL/createTask';
   static const String fromAllTheTask = '$_baseURL/listTaskByStatus';
   static const String getNewTask = '$fromAllTheTask/New';
+  static const String getCompletedTask = '$fromAllTheTask/Completed';
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../widgets/background_widget.dart';
-import '../widgets/new_task_item.dart';
+import '../widgets/task_item.dart';
 
 class CanceledTaskScreen extends StatefulWidget {
   const CanceledTaskScreen({super.key});
@@ -17,7 +17,7 @@ class _CanceledTaskScreenState extends State<CanceledTaskScreen> {
       body: BackgroundWidget(
         child: Padding(
           padding: EdgeInsets.only(left: 15, top: 10, right: 15, bottom: 10),
-          child: NewTaskItem(newTaskListModel: [],
+          child: NewTaskItem(taskListModel: [],
           child: Container(
             width: 100,
             decoration: BoxDecoration(
