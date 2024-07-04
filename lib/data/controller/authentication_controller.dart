@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../model/UserDataModel.dart';
+import '../model/user_data_model.dart';
 
 class AuthenticationController{
   static const String _accessTokenKey = 'assess_token';

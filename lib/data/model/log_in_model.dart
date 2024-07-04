@@ -1,4 +1,4 @@
-import 'UserDataModel.dart';
+import 'user_data_model.dart';
 
 class LogInModel {
   String? status;

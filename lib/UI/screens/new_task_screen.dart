@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:task_manager/UI/screens/add_task_screen.dart';
 import 'package:task_manager/UI/widgets/background_widget.dart';
+import 'package:task_manager/data/controller/task_status_model_wrapper.dart';
+import 'package:task_manager/data/model/task_status_model.dart';
 
 import '../../data/controller/task_controller.dart';
 import '../../data/model/api_response.dart';
@@ -21,11 +23,13 @@ class NewTaskScreen extends StatefulWidget {
 
 class _NewTaskScreenState extends State<NewTaskScreen> {
   List<SavedUserTaskData> _newTaskList = [];
+  List<TaskStatusModel> _taskStatusList = [];
   bool _loading = false;
 
   @override
   initState() {
     super.initState();
+    _getTaskStatus();
     _getSomeNewTask();
   }
   @override
@@ -46,12 +50,9 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Row(
-                      children: [
-                        _summaryCard(number: '110', title: 'New Task'),
-                        _summaryCard(number: '86', title: 'Completed'),
-                        _summaryCard(number: '09', title: 'Canceled'),
-                        _summaryCard(number: '18', title: 'Progress'),
-                      ],
+                      children: _taskStatusList.map((e){
+                        return _summaryCard(number: e.sum.toString(), title: (e.sId??'unknown').toUpperCase());
+                      }).toList(),
                     ),
                   ),
                   SizedBox(height: 7,),
@@ -106,6 +107,27 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
       }
     }
   }
+  Future<void> _getTaskStatus() async{
+    setState(() {
+      _loading = true;
+    });
+    ApiResponse getDataFromServer = await ApiCall.getResponse(URLList.getStatus);
+    if(getDataFromServer.isSuccess){
+      TaskStatusModelWrapper taskStatusModelWrapper = TaskStatusModelWrapper.fromJson(getDataFromServer.responseData);
+      _taskStatusList = taskStatusModelWrapper.data ?? [];
+      setState(() {
+        _loading = false;
+      });
+    }else{
+      if(mounted){
+        bottomPopUpMessage(context, 'Error occur while loading task status', showError: true);
+        setState(() {
+          _loading = false;
+        });
+      }
+    }
+  }
+
   //=======================================================WIDGETS=======================================================
   Widget _summaryCard({required String number, required String title}) {
     return Card(
