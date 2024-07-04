@@ -56,11 +56,14 @@ class _NewTaskItemState extends State<NewTaskItem> {
                       children: [
                         Visibility(
                           visible: _statusEditInProcess == false,
-                          replacement: CircularProgressIndicator(color: Color(0xff21BF73),),
+                          replacement: SizedBox(
+                            height: 20,
+                              width: 20,
+                              child: CircularProgressIndicator(color: Color(0xff21BF73),)),
                           child: IconButton(
                             onPressed: () {
                               _onPressEditStatus(
-                                  widget.taskListModel[i].sId ?? '');
+                                  widget.taskListModel[i].sId!);
                             },
                             icon: const Icon(
                               Icons.edit_note_outlined,
@@ -69,12 +72,18 @@ class _NewTaskItemState extends State<NewTaskItem> {
                             ),
                           ),
                         ),
-                        IconButton(
-                          onPressed: () {},
-                          icon: const Icon(
-                            Icons.delete_outline,
-                            color: Colors.red,
-                            size: 24,
+                        Visibility(
+                          visible: _deleteInProcess == false,
+                          replacement: SizedBox(height: 20, width: 20,child: CircularProgressIndicator(color: Color(0xff21BF73),),),
+                          child: IconButton(
+                            onPressed: (){
+                              _onPressDeleteTask(widget.taskListModel[i].sId.toString());
+                            },
+                            icon: const Icon(
+                              Icons.delete_outline,
+                              color: Colors.red,
+                              size: 24,
+                            ),
                           ),
                         ),
                       ],
@@ -210,7 +219,9 @@ class _NewTaskItemState extends State<NewTaskItem> {
                       _statusEditInProcess = false;
                     });
                   }else{
-                    bottomPopUpMessage(context, 'Something Went wrong while updating task status.', showError: true);
+                    if(mounted){
+                      bottomPopUpMessage(context, 'Something Went wrong while updating task status.', showError: true);
+                    }
                     setState(() {
                       _statusEditInProcess = false;
                     });
@@ -231,6 +242,24 @@ class _NewTaskItemState extends State<NewTaskItem> {
             ],
           );
         });
+  }
+  Future<void> _onPressDeleteTask(String iD) async{
+    setState(() {
+      _deleteInProcess = true;
+    });
+    ApiResponse getResponseFromServer = await ApiCall.getResponse(URLList.deleteTask(iD));
+    if(getResponseFromServer.isSuccess && mounted){
+      bottomPopUpMessage(context, 'Delete Successful!');
+      widget.onUpdateTask();
+    }else{
+      if(mounted){
+        bottomPopUpMessage(context, 'Something Went wrong while deleting the task.', showError: true);
+      }
+      await Future.delayed(Duration(seconds: 02));
+      setState(() {
+        _deleteInProcess = false;
+      });
+    }
   }
 
 //======================================Widgets========================================

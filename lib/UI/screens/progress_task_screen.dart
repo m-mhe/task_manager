@@ -37,7 +37,7 @@ class _ProgressTaskScreenState extends State<ProgressTaskScreen> {
               padding: EdgeInsets.only(left: 15, top: 10, right: 15, bottom: 10),
               child: NewTaskItem(
                 taskListModel: _progressTaskList,
-                onUpdateTask: () {  },
+                onUpdateTask: () async { await _getSomeProgressTask(); },
                 child: Container(
                   width: 100,
                   decoration: BoxDecoration(

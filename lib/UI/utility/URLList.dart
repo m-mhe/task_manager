@@ -10,4 +10,5 @@ class URLList{
   static const String getProgressTask = '$fromAllTheTask/Progress';
   static const String getStatus = '$_baseURL/taskStatusCount';
   static updateStatus(String idAndStatus) => '$_baseURL/updateTaskStatus/$idAndStatus';
+  static deleteTask(String iD) => '$_baseURL/deleteTask/$iD';
 }
