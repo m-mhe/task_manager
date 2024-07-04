@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:task_manager/UI/screens/add_task_screen.dart';
 import 'package:task_manager/UI/widgets/background_widget.dart';
@@ -59,7 +61,7 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
                     decoration: BoxDecoration(
                         color: Colors.lightBlue,
                         borderRadius: BorderRadius.circular(80)),
-                    child: Text(
+                    child: const Text(
                       "New",
                       textAlign: TextAlign.center,
                       style: TextStyle(
@@ -97,15 +99,19 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
     }else{
       if(mounted){
         bottomPopUpMessage(context, 'Loading Failed', showError: true);
+        await Future.delayed(const Duration(seconds: 2));
+        setState(() {
+          _loading = false;
+        });
       }
     }
   }
-
   //=======================================================WIDGETS=======================================================
   Widget _summaryCard({required String number, required String title}) {
     return Card(
       color: Colors.white,
       elevation: 3,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(7)),
       child: SizedBox(
         width: 120,
         height: 70,
@@ -124,7 +130,6 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
           ],
         ),
       ),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(7)),
     );
   }
 }

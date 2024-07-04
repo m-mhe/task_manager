@@ -74,6 +74,10 @@ class _CompletedTaskScreenState extends State<CompletedTaskScreen> {
     }else{
       if(mounted){
         bottomPopUpMessage(context, 'Loading Failed', showError: true);
+        await Future.delayed(const Duration(seconds: 2));
+        setState(() {
+          _loading = false;
+        });
       }
     }
   }

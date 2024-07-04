@@ -98,8 +98,6 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                               await ApiCall.postResponse(
                                   URLList.createTask, userResponse);
                           if (getResponseFromTheServer.isSuccess && mounted) {
-                            _tEcDescription.clear();
-                            _tEcSubject.clear();
                             Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>const BottomNavBar()), (route)=>false);
                             bottomPopUpMessage(context, 'A New Task Added!', showError: false);
                           } else {
@@ -108,6 +106,9 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                                 bottomPopUpMessage(context,
                                     'Error occurred while adding a new task. Check internet connection and try again',
                                     showError: true);
+                              });
+                              await Future.delayed(Duration(seconds: 2));
+                              setState(() {
                                 _notLoading = true;
                               });
                             }

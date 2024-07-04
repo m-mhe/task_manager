@@ -43,4 +43,8 @@ class AuthenticationController{
       return true;
     }
   }
+  static Future<void> clearLogInCache() async{
+    SharedPreferences logInCache = await SharedPreferences.getInstance();
+    await logInCache.clear();
+  }
 }
