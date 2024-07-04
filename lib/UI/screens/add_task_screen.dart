@@ -124,7 +124,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                     ),
                   ),
                   const SizedBox(
-                    height: 20,
+                    height: 50,
                   ),
                 ],
               ),
@@ -133,6 +133,12 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
         ),
       ),
     );
+  }
+  @override
+  void dispose() {
+    super.dispose();
+    _tEcDescription.dispose();
+    _tEcSubject.dispose();
   }
 
   //=======================================================VARIABLES=======================================================

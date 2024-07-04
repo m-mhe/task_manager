@@ -117,7 +117,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                         onPressed: () {},
                         child: const Icon(Icons.arrow_circle_right_outlined)),
                     const SizedBox(
-                      height: 20,
+                      height: 50,
                     ),
                   ],
                 ),
