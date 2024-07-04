@@ -1,6 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:task_manager/UI/utility/URLList.dart';
+import 'package:task_manager/UI/utility/url_list.dart';
 import 'package:task_manager/UI/utility/validator.dart';
 import 'package:task_manager/UI/widgets/background_widget.dart';
 import 'package:task_manager/UI/widgets/snack_bar_message.dart';
@@ -234,13 +234,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
       setState(() {
         _registrationInProgress = false;
       });
-      await Future.delayed(Duration(seconds: 1));
+      await Future.delayed(const Duration(seconds: 1));
       Navigator.pop(context);
     } else {
       if (mounted) {
         bottomPopUpMessage(context, 'Registration failed! Please try again.',
             showError: true);
-        await Future.delayed(Duration(seconds: 2));
+        await Future.delayed(const Duration(seconds: 2));
         setState(() {
           _registrationInProgress = false;
         });

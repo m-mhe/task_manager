@@ -10,7 +10,7 @@ import '../../data/controller/task_controller.dart';
 import '../../data/model/api_response.dart';
 import '../../data/model/saved_user_task_data.dart';
 import '../../data/network_caller/api_call.dart';
-import '../utility/URLList.dart';
+import '../utility/url_list.dart';
 import '../widgets/task_item.dart';
 import '../widgets/snack_bar_message.dart';
 
@@ -37,14 +37,14 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: RefreshIndicator(
-        color: Color(0xff21BF73),
-        onRefresh: () async{
+        color: const Color(0xff21BF73),
+        onRefresh: () async {
           _getSomeNewTask();
           _getTaskStatus();
         },
         child: Visibility(
           visible: _loading == false,
-          replacement: Center(
+          replacement: const Center(
             child: CircularProgressIndicator(
               color: Color(0xff21BF73),
             ),
@@ -65,7 +65,7 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
                       }).toList(),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 7,
                   ),
                   Expanded(
@@ -97,7 +97,7 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _onPressAddTaskScreen,
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
     );
   }
@@ -107,7 +107,7 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => AddTaskScreen(),
+        builder: (context) => const AddTaskScreen(),
       ),
     );
   }

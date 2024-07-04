@@ -13,12 +13,14 @@ class NetworkCachedImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CachedNetworkImage(
-        imageUrl: url,
-      progressIndicatorBuilder: (_, __, ___){
-          return CircularProgressIndicator(color: Colors.grey,);
+      imageUrl: url,
+      progressIndicatorBuilder: (_, __, ___) {
+        return const CircularProgressIndicator(
+          color: Colors.grey,
+        );
       },
-      errorWidget: (_,__,___){
-          return Icon(Icons.person);
+      errorWidget: (_, __, ___) {
+        return const Icon(Icons.person);
       },
       height: height,
       width: width,

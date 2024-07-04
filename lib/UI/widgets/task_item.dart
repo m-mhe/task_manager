@@ -3,11 +3,14 @@ import 'package:task_manager/UI/widgets/snack_bar_message.dart';
 import 'package:task_manager/data/model/api_response.dart';
 import 'package:task_manager/data/network_caller/api_call.dart';
 import '../../data/model/saved_user_task_data.dart';
-import '../utility/URLList.dart';
+import '../utility/url_list.dart';
 
 class NewTaskItem extends StatefulWidget {
   const NewTaskItem(
-      {super.key, required this.child, required this.taskListModel, required this.onUpdateTask});
+      {super.key,
+      required this.child,
+      required this.taskListModel,
+      required this.onUpdateTask});
 
   final Widget child;
   final List<SavedUserTaskData> taskListModel;
@@ -56,14 +59,15 @@ class _NewTaskItemState extends State<NewTaskItem> {
                       children: [
                         Visibility(
                           visible: _statusEditInProcess == false,
-                          replacement: SizedBox(
-                            height: 20,
+                          replacement: const SizedBox(
+                              height: 20,
                               width: 20,
-                              child: CircularProgressIndicator(color: Color(0xff21BF73),)),
+                              child: CircularProgressIndicator(
+                                color: Color(0xff21BF73),
+                              )),
                           child: IconButton(
                             onPressed: () {
-                              _onPressEditStatus(
-                                  widget.taskListModel[i].sId!);
+                              _onPressEditStatus(widget.taskListModel[i].sId!);
                             },
                             icon: const Icon(
                               Icons.edit_note_outlined,
@@ -74,10 +78,17 @@ class _NewTaskItemState extends State<NewTaskItem> {
                         ),
                         Visibility(
                           visible: _deleteInProcess == false,
-                          replacement: SizedBox(height: 20, width: 20,child: CircularProgressIndicator(color: Color(0xff21BF73),),),
+                          replacement: const SizedBox(
+                            height: 20,
+                            width: 20,
+                            child: CircularProgressIndicator(
+                              color: Color(0xff21BF73),
+                            ),
+                          ),
                           child: IconButton(
-                            onPressed: (){
-                              _onPressDeleteTask(widget.taskListModel[i].sId.toString());
+                            onPressed: () {
+                              _onPressDeleteTask(
+                                  widget.taskListModel[i].sId.toString());
                             },
                             icon: const Icon(
                               Icons.delete_outline,
@@ -116,31 +127,34 @@ class _NewTaskItemState extends State<NewTaskItem> {
                   setState(() {
                     _statusEditInProcess = true;
                   });
-                  ApiResponse getResponseFromServer = await ApiCall.getResponse(URLList.updateStatus('$iD/New'));
-                  if(getResponseFromServer.isSuccess && mounted){
+                  ApiResponse getResponseFromServer = await ApiCall.getResponse(
+                      URLList.updateStatus('$iD/New'));
+                  if (getResponseFromServer.isSuccess && mounted) {
                     widget.onUpdateTask();
                     bottomPopUpMessage(context, 'Task Status Updated!');
                     setState(() {
                       _statusEditInProcess = false;
                     });
-                  }else{
-                    bottomPopUpMessage(context, 'Something Went wrong while updating task status.', showError: true);
+                  } else {
+                    bottomPopUpMessage(context,
+                        'Something Went wrong while updating task status.',
+                        showError: true);
                     setState(() {
                       _statusEditInProcess = false;
                     });
                   }
-                  if(mounted){
+                  if (mounted) {
                     Navigator.pop(context);
                   }
                 },
-                child: Text(
+                style: TextButton.styleFrom(
+                    backgroundColor: Colors.lightBlue,
+                    foregroundColor: Colors.white),
+                child: const Text(
                   'NEW',
                   style: TextStyle(
                       color: Colors.white, fontWeight: FontWeight.w700),
                 ),
-                style: TextButton.styleFrom(
-                    backgroundColor: Colors.lightBlue,
-                    foregroundColor: Colors.white),
               )),
               Center(
                   child: TextButton(
@@ -148,31 +162,34 @@ class _NewTaskItemState extends State<NewTaskItem> {
                   setState(() {
                     _statusEditInProcess = true;
                   });
-                  ApiResponse getResponseFromServer = await ApiCall.getResponse(URLList.updateStatus('$iD/Completed'));
-                  if(getResponseFromServer.isSuccess && mounted){
+                  ApiResponse getResponseFromServer = await ApiCall.getResponse(
+                      URLList.updateStatus('$iD/Completed'));
+                  if (getResponseFromServer.isSuccess && mounted) {
                     widget.onUpdateTask();
                     bottomPopUpMessage(context, 'Task Status Updated!');
                     setState(() {
                       _statusEditInProcess = false;
                     });
-                  }else{
-                    bottomPopUpMessage(context, 'Something Went wrong while updating task status.', showError: true);
+                  } else {
+                    bottomPopUpMessage(context,
+                        'Something Went wrong while updating task status.',
+                        showError: true);
                     setState(() {
                       _statusEditInProcess = false;
                     });
                   }
-                  if(mounted){
+                  if (mounted) {
                     Navigator.pop(context);
                   }
                 },
-                child: Text(
+                style: TextButton.styleFrom(
+                    backgroundColor: const Color(0xff21BF73),
+                    foregroundColor: Colors.white),
+                child: const Text(
                   'COMPLETED',
                   style: TextStyle(
                       color: Colors.white, fontWeight: FontWeight.w700),
                 ),
-                style: TextButton.styleFrom(
-                    backgroundColor: Color(0xff21BF73),
-                    foregroundColor: Colors.white),
               )),
               Center(
                   child: TextButton(
@@ -180,30 +197,33 @@ class _NewTaskItemState extends State<NewTaskItem> {
                   setState(() {
                     _statusEditInProcess = true;
                   });
-                  ApiResponse getResponseFromServer = await ApiCall.getResponse(URLList.updateStatus('$iD/Canceled'));
-                  if(getResponseFromServer.isSuccess && mounted){
+                  ApiResponse getResponseFromServer = await ApiCall.getResponse(
+                      URLList.updateStatus('$iD/Canceled'));
+                  if (getResponseFromServer.isSuccess && mounted) {
                     widget.onUpdateTask();
                     bottomPopUpMessage(context, 'Task Status Updated!');
                     setState(() {
                       _statusEditInProcess = false;
                     });
-                  }else{
-                    bottomPopUpMessage(context, 'Something Went wrong while updating task status.', showError: true);
+                  } else {
+                    bottomPopUpMessage(context,
+                        'Something Went wrong while updating task status.',
+                        showError: true);
                     setState(() {
                       _statusEditInProcess = false;
                     });
                   }
-                  if(mounted){
+                  if (mounted) {
                     Navigator.pop(context);
                   }
                 },
-                child: Text(
+                style: TextButton.styleFrom(
+                    backgroundColor: Colors.red, foregroundColor: Colors.white),
+                child: const Text(
                   'CANCELED',
                   style: TextStyle(
                       color: Colors.white, fontWeight: FontWeight.w700),
                 ),
-                style: TextButton.styleFrom(
-                    backgroundColor: Colors.red, foregroundColor: Colors.white),
               )),
               Center(
                   child: TextButton(
@@ -211,51 +231,58 @@ class _NewTaskItemState extends State<NewTaskItem> {
                   setState(() {
                     _statusEditInProcess = true;
                   });
-                  ApiResponse getResponseFromServer = await ApiCall.getResponse(URLList.updateStatus('$iD/Progress'));
-                  if(getResponseFromServer.isSuccess && mounted){
+                  ApiResponse getResponseFromServer = await ApiCall.getResponse(
+                      URLList.updateStatus('$iD/Progress'));
+                  if (getResponseFromServer.isSuccess && mounted) {
                     widget.onUpdateTask();
                     bottomPopUpMessage(context, 'Task Status Updated!');
                     setState(() {
                       _statusEditInProcess = false;
                     });
-                  }else{
-                    if(mounted){
-                      bottomPopUpMessage(context, 'Something Went wrong while updating task status.', showError: true);
+                  } else {
+                    if (mounted) {
+                      bottomPopUpMessage(context,
+                          'Something Went wrong while updating task status.',
+                          showError: true);
                     }
                     setState(() {
                       _statusEditInProcess = false;
                     });
                   }
-                  if(mounted){
+                  if (mounted) {
                     Navigator.pop(context);
                   }
                 },
-                child: Text(
+                style: TextButton.styleFrom(
+                    backgroundColor: Colors.purple,
+                    foregroundColor: Colors.white),
+                child: const Text(
                   'PROGRESS',
                   style: TextStyle(
                       color: Colors.white, fontWeight: FontWeight.w700),
                 ),
-                style: TextButton.styleFrom(
-                    backgroundColor: Colors.purple,
-                    foregroundColor: Colors.white),
               )),
             ],
           );
         });
   }
-  Future<void> _onPressDeleteTask(String iD) async{
+
+  Future<void> _onPressDeleteTask(String iD) async {
     setState(() {
       _deleteInProcess = true;
     });
-    ApiResponse getResponseFromServer = await ApiCall.getResponse(URLList.deleteTask(iD));
-    if(getResponseFromServer.isSuccess && mounted){
+    ApiResponse getResponseFromServer =
+        await ApiCall.getResponse(URLList.deleteTask(iD));
+    if (getResponseFromServer.isSuccess && mounted) {
       bottomPopUpMessage(context, 'Delete Successful!');
       widget.onUpdateTask();
-    }else{
-      if(mounted){
-        bottomPopUpMessage(context, 'Something Went wrong while deleting the task.', showError: true);
+    } else {
+      if (mounted) {
+        bottomPopUpMessage(
+            context, 'Something Went wrong while deleting the task.',
+            showError: true);
       }
-      await Future.delayed(Duration(seconds: 02));
+      await Future.delayed(const Duration(seconds: 02));
       setState(() {
         _deleteInProcess = false;
       });
@@ -263,5 +290,4 @@ class _NewTaskItemState extends State<NewTaskItem> {
   }
 
 //======================================Widgets========================================
-
 }

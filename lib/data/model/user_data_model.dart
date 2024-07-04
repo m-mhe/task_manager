@@ -5,7 +5,8 @@ class UserDataModel {
   String? mobile;
   String? photo;
 
-  UserDataModel({this.email, this.firstName, this.lastName, this.mobile, this.photo});
+  UserDataModel(
+      {this.email, this.firstName, this.lastName, this.mobile, this.photo});
 
   UserDataModel.fromJson(Map<String, dynamic> json) {
     email = json['email'];

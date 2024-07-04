@@ -1,6 +1,4 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:task_manager/UI/screens/authentication/pin_for_resetting_password_screen.dart';
 import 'package:task_manager/UI/widgets/background_widget.dart';
 import 'package:task_manager/UI/widgets/profile_app_bar.dart';
 import 'package:task_manager/data/controller/authentication_controller.dart';
@@ -52,13 +50,17 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                         width: 100,
                         alignment: Alignment.center,
                         decoration: const BoxDecoration(
-                            color: Colors.black54,
-                            borderRadius: BorderRadius.only(
+                          color: Colors.black54,
+                          borderRadius: BorderRadius.only(
                               topLeft: Radius.circular(7),
-                              bottomLeft: Radius.circular(7)
-                            ),
+                              bottomLeft: Radius.circular(7)),
                         ),
-                        child: Text('Photos', style: TextStyle(color: Colors.grey[200], fontWeight: FontWeight.w500),),
+                        child: Text(
+                          'Photos',
+                          style: TextStyle(
+                              color: Colors.grey[200],
+                              fontWeight: FontWeight.w500),
+                        ),
                       ),
                     ),
                     const SizedBox(
@@ -128,15 +130,18 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
   }
 
   //=======================================================VARIABLES=======================================================
-  final TextEditingController _tEcEmail = TextEditingController(text: AuthenticationController.userData!.email??'');
-  final TextEditingController _tEcFName = TextEditingController(text: AuthenticationController.userData!.firstName??'');
-  final TextEditingController _tEcLName = TextEditingController(text: AuthenticationController.userData!.lastName??'');
-  final TextEditingController _tEcMobile = TextEditingController(text: AuthenticationController.userData!.mobile??'');
+  final TextEditingController _tEcEmail = TextEditingController(
+      text: AuthenticationController.userData!.email ?? '');
+  final TextEditingController _tEcFName = TextEditingController(
+      text: AuthenticationController.userData!.firstName ?? '');
+  final TextEditingController _tEcLName = TextEditingController(
+      text: AuthenticationController.userData!.lastName ?? '');
+  final TextEditingController _tEcMobile = TextEditingController(
+      text: AuthenticationController.userData!.mobile ?? '');
   final TextEditingController _tEcPassword = TextEditingController();
   final GlobalKey<FormState> _formKeyUpdateProfile = GlobalKey<FormState>();
 
   //=======================================================FUNCTIONS=======================================================
-
 
   @override
   void dispose() {

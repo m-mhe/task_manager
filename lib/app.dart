@@ -3,6 +3,7 @@ import 'package:task_manager/UI/screens/authentication/splash_screen.dart';
 
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
   static GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
   @override
@@ -32,26 +33,22 @@ class _MyAppState extends State<MyApp> {
         unselectedItemColor: Colors.black87,
       ),
       textTheme: const TextTheme(
-          titleLarge: TextStyle(
-              fontWeight: FontWeight.w800,
-              fontSize: 28,
-              color: Colors.black87),
-          bodySmall: TextStyle(
-              fontSize: 14, fontWeight: FontWeight.w600, color: Colors.grey),
-          titleSmall: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w600,
-              color: Colors.black87),
-          headlineLarge: TextStyle(
-            color: Colors.black87,
-            fontWeight: FontWeight.w600,
-            fontSize: 18,
-          ),
-          headlineMedium: TextStyle(
-            color: Colors.black87,
-            fontWeight: FontWeight.w600,
-            fontSize: 16,
-          ),
+        titleLarge: TextStyle(
+            fontWeight: FontWeight.w800, fontSize: 28, color: Colors.black87),
+        bodySmall: TextStyle(
+            fontSize: 14, fontWeight: FontWeight.w600, color: Colors.grey),
+        titleSmall: TextStyle(
+            fontSize: 14, fontWeight: FontWeight.w600, color: Colors.black87),
+        headlineLarge: TextStyle(
+          color: Colors.black87,
+          fontWeight: FontWeight.w600,
+          fontSize: 18,
+        ),
+        headlineMedium: TextStyle(
+          color: Colors.black87,
+          fontWeight: FontWeight.w600,
+          fontSize: 16,
+        ),
         headlineSmall: TextStyle(
             fontSize: 12, fontWeight: FontWeight.w500, color: Colors.black54),
       ),
@@ -66,12 +63,13 @@ class _MyAppState extends State<MyApp> {
             borderRadius: BorderRadius.circular(7),
             borderSide: const BorderSide(color: Colors.white)),
         errorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(7),
-            borderSide: const BorderSide(color: Colors.red, width: 2),
+          borderRadius: BorderRadius.circular(7),
+          borderSide: const BorderSide(color: Colors.red, width: 2),
         ),
         focusedErrorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(7),
-            borderSide: BorderSide(color: Colors.red),),
+          borderRadius: BorderRadius.circular(7),
+          borderSide: BorderSide(color: Colors.red),
+        ),
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
@@ -86,9 +84,7 @@ class _MyAppState extends State<MyApp> {
       floatingActionButtonTheme: FloatingActionButtonThemeData(
         backgroundColor: Color(0xff21BF73),
         foregroundColor: Colors.white,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(7)
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(7)),
       ),
     );
   }

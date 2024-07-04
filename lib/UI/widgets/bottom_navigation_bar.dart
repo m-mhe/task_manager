@@ -28,16 +28,36 @@ class _BottomNavBarState extends State<BottomNavBar> {
       appBar: profileAppBar(context),
       body: _screens[_screenIndex],
       bottomNavigationBar: BottomNavigationBar(
-        onTap: (i){
+        onTap: (i) {
           _screenIndex = i;
           setState(() {});
         },
         currentIndex: _screenIndex,
-        items: [
-          BottomNavigationBarItem(icon: Icon(Icons.task_outlined,),label: 'New Task',),
-          BottomNavigationBarItem(icon: Icon(Icons.task_outlined,),label: 'Completed',),
-          BottomNavigationBarItem(icon: Icon(Icons.task_outlined,),label: 'Canceled',),
-          BottomNavigationBarItem(icon: Icon(Icons.task_outlined,),label: 'Progress',),
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.task_outlined,
+            ),
+            label: 'New Task',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.task_outlined,
+            ),
+            label: 'Completed',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.task_outlined,
+            ),
+            label: 'Canceled',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.task_outlined,
+            ),
+            label: 'Progress',
+          ),
         ],
       ),
     );

@@ -2,7 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:task_manager/UI/screens/authentication/email_for_resetting_password_screen.dart';
 import 'package:task_manager/UI/screens/authentication/sign_up_screen.dart';
-import 'package:task_manager/UI/utility/URLList.dart';
+import 'package:task_manager/UI/utility/url_list.dart';
 import 'package:task_manager/UI/utility/validator.dart';
 import 'package:task_manager/UI/widgets/background_widget.dart';
 import 'package:task_manager/UI/widgets/bottom_navigation_bar.dart';
@@ -152,7 +152,8 @@ class _SignInScreenState extends State<SignInScreen> {
         await ApiCall.postResponse(URLList.logInURL, userSignInData);
     if (getServerResponse.isSuccess == true) {
       if (mounted) {
-        LogInModel logInModel = LogInModel.fromJson(getServerResponse.responseData);
+        LogInModel logInModel =
+            LogInModel.fromJson(getServerResponse.responseData);
         await AuthenticationController.saveLogInToken(logInModel.token!);
         await AuthenticationController.saveUserData(logInModel.data!);
         bottomPopUpMessage(

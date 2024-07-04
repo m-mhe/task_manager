@@ -1,7 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:task_manager/UI/screens/authentication/reset_password_screen.dart';
-import 'package:task_manager/UI/screens/authentication/sign_in_screen.dart';
 import 'package:task_manager/UI/widgets/background_widget.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
@@ -53,8 +52,8 @@ class _PinForResettingPasswordScreenState
                     pinTheme: PinTheme(
                         shape: PinCodeFieldShape.box,
                         borderRadius: BorderRadius.circular(5),
-                        fieldHeight: MediaQuery.sizeOf(context).width/9,
-                        fieldWidth: MediaQuery.sizeOf(context).width/9,
+                        fieldHeight: MediaQuery.sizeOf(context).width / 9,
+                        fieldWidth: MediaQuery.sizeOf(context).width / 9,
                         activeFillColor: Colors.white,
                         selectedFillColor: Colors.white,
                         selectedColor: const Color(0xff21BF73),

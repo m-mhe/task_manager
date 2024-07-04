@@ -5,7 +5,7 @@ import 'package:task_manager/UI/widgets/snack_bar_message.dart';
 import 'package:task_manager/data/controller/authentication_controller.dart';
 
 import '../../widgets/bottom_navigation_bar.dart';
-import '../../widgets/intro_background_Widget.dart';
+import '../../widgets/intro_background_widget.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -20,7 +20,7 @@ class _SplashScreenState extends State<SplashScreen> {
     bool isUserLogedIn =
         await AuthenticationController.checkIfUserLogedInOrNot();
     if (mounted) {
-      if(isUserLogedIn==true) {
+      if (isUserLogedIn == true) {
         bottomPopUpMessage(context, 'You are Signed In!', showError: false);
       }
       Navigator.pushReplacement(

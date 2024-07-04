@@ -5,7 +5,7 @@ import 'package:task_manager/UI/widgets/snack_bar_message.dart';
 import 'package:task_manager/data/model/api_response.dart';
 import 'package:task_manager/data/network_caller/api_call.dart';
 
-import '../utility/URLList.dart';
+import '../utility/url_list.dart';
 import '../widgets/bottom_navigation_bar.dart';
 
 class AddTaskScreen extends StatefulWidget {
@@ -76,7 +76,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                   ),
                   Visibility(
                     visible: _notLoading == true,
-                    replacement: SizedBox(
+                    replacement: const SizedBox(
                         height: 25,
                         width: 25,
                         child: CircularProgressIndicator(
@@ -98,8 +98,13 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                               await ApiCall.postResponse(
                                   URLList.createTask, userResponse);
                           if (getResponseFromTheServer.isSuccess && mounted) {
-                            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>const BottomNavBar()), (route)=>false);
-                            bottomPopUpMessage(context, 'A New Task Added!', showError: false);
+                            Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const BottomNavBar()),
+                                (route) => false);
+                            bottomPopUpMessage(context, 'A New Task Added!',
+                                showError: false);
                           } else {
                             if (mounted) {
                               setState(() {
@@ -107,7 +112,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                                     'Error occurred while adding a new task. Check internet connection and try again',
                                     showError: true);
                               });
-                              await Future.delayed(Duration(seconds: 2));
+                              await Future.delayed(const Duration(seconds: 2));
                               setState(() {
                                 _notLoading = true;
                               });

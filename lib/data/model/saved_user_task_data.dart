@@ -5,7 +5,8 @@ class SavedUserTaskData {
   String? status;
   String? createdDate;
 
-  SavedUserTaskData({this.sId, this.title, this.description, this.status, this.createdDate});
+  SavedUserTaskData(
+      {this.sId, this.title, this.description, this.status, this.createdDate});
 
   SavedUserTaskData.fromJson(Map<String, dynamic> json) {
     sId = json['_id'];
