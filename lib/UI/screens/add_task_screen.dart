@@ -4,7 +4,6 @@ import 'package:task_manager/UI/widgets/profile_app_bar.dart';
 import 'package:task_manager/UI/widgets/snack_bar_message.dart';
 import 'package:task_manager/data/model/api_response.dart';
 import 'package:task_manager/data/network_caller/api_call.dart';
-
 import '../utility/url_list.dart';
 import '../widgets/bottom_navigation_bar.dart';
 
