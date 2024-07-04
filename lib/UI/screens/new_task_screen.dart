@@ -32,73 +32,104 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
     _getTaskStatus();
     _getSomeNewTask();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: RefreshIndicator(
         color: Color(0xff21BF73),
-        onRefresh: _getSomeNewTask,
+        onRefresh: () async{
+          _getSomeNewTask();
+          _getTaskStatus();
+        },
         child: Visibility(
-          visible: _loading==false,
-          replacement: Center(child: CircularProgressIndicator(color: Color(0xff21BF73),),),
+          visible: _loading == false,
+          replacement: Center(
+            child: CircularProgressIndicator(
+              color: Color(0xff21BF73),
+            ),
+          ),
           child: BackgroundWidget(
             child: Padding(
-              padding:
-                  const EdgeInsets.only(left: 15, top: 10, right: 15, bottom: 10),
+              padding: const EdgeInsets.only(
+                  left: 15, top: 10, right: 15, bottom: 10),
               child: Column(
                 children: [
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Row(
-                      children: _taskStatusList.map((e){
-                        return _summaryCard(number: e.sum.toString(), title: (e.sId??'unknown').toUpperCase());
+                      children: _taskStatusList.map((e) {
+                        return _summaryCard(
+                            number: e.sum.toString(),
+                            title: (e.sId ?? 'unknown').toUpperCase());
                       }).toList(),
                     ),
                   ),
-                  SizedBox(height: 7,),
-                  Expanded(child: NewTaskItem(taskListModel: _newTaskList.reversed.toList(),
-                  child: Container(
-                    width: 100,
-                    decoration: BoxDecoration(
-                        color: Colors.lightBlue,
-                        borderRadius: BorderRadius.circular(80)),
-                    child: const Text(
-                      "New",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          color: Colors.white, fontWeight: FontWeight.w600),
+                  SizedBox(
+                    height: 7,
+                  ),
+                  Expanded(
+                    child: NewTaskItem(
+                      taskListModel: _newTaskList.reversed.toList(),
+                      onUpdateTask: () async {
+                        await _getTaskStatus();
+                        await _getSomeNewTask();
+                      },
+                      child: Container(
+                        width: 100,
+                        decoration: BoxDecoration(
+                            color: Colors.lightBlue,
+                            borderRadius: BorderRadius.circular(80)),
+                        child: const Text(
+                          "New",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              color: Colors.white, fontWeight: FontWeight.w600),
+                        ),
+                      ),
                     ),
-                  ),),),
+                  ),
                 ],
               ),
             ),
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(onPressed: _onPressAddTaskScreen, child: Icon(Icons.add),),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _onPressAddTaskScreen,
+        child: Icon(Icons.add),
+      ),
     );
   }
 
   //=======================================================FUNCTIONS=======================================================
-  void _onPressAddTaskScreen(){
-    Navigator.push(context, MaterialPageRoute(builder: (context)=>AddTaskScreen(),),);
+  void _onPressAddTaskScreen() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => AddTaskScreen(),
+      ),
+    );
   }
-  Future<void> _getSomeNewTask() async{
-    if(mounted){
+
+  Future<void> _getSomeNewTask() async {
+    if (mounted) {
       setState(() {
         _loading = true;
       });
     }
-    ApiResponse getDataFromServer = await ApiCall.getResponse(URLList.getNewTask);
-    if(getDataFromServer.isSuccess && mounted){
+    ApiResponse getDataFromServer =
+        await ApiCall.getResponse(URLList.getNewTask);
+    if (getDataFromServer.isSuccess && mounted) {
       bottomPopUpMessage(context, 'Loading Success!', showError: false);
-      TaskModelWrapper newTaskModelWrapper = TaskModelWrapper.fromJson(getDataFromServer.responseData);
-      _newTaskList = newTaskModelWrapper.data??[];
+      TaskModelWrapper newTaskModelWrapper =
+          TaskModelWrapper.fromJson(getDataFromServer.responseData);
+      _newTaskList = newTaskModelWrapper.data ?? [];
       setState(() {
         _loading = false;
       });
-    }else{
-      if(mounted){
+    } else {
+      if (mounted) {
         bottomPopUpMessage(context, 'Loading Failed', showError: true);
         await Future.delayed(const Duration(seconds: 2));
         setState(() {
@@ -107,20 +138,24 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
       }
     }
   }
-  Future<void> _getTaskStatus() async{
+
+  Future<void> _getTaskStatus() async {
     setState(() {
       _loading = true;
     });
-    ApiResponse getDataFromServer = await ApiCall.getResponse(URLList.getStatus);
-    if(getDataFromServer.isSuccess){
-      TaskStatusModelWrapper taskStatusModelWrapper = TaskStatusModelWrapper.fromJson(getDataFromServer.responseData);
+    ApiResponse getDataFromServer =
+        await ApiCall.getResponse(URLList.getStatus);
+    if (getDataFromServer.isSuccess) {
+      TaskStatusModelWrapper taskStatusModelWrapper =
+          TaskStatusModelWrapper.fromJson(getDataFromServer.responseData);
       _taskStatusList = taskStatusModelWrapper.data ?? [];
       setState(() {
         _loading = false;
       });
-    }else{
-      if(mounted){
-        bottomPopUpMessage(context, 'Error occur while loading task status', showError: true);
+    } else {
+      if (mounted) {
+        bottomPopUpMessage(context, 'Error occur while loading task status',
+            showError: true);
         setState(() {
           _loading = false;
         });

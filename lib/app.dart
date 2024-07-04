@@ -86,7 +86,9 @@ class _MyAppState extends State<MyApp> {
       floatingActionButtonTheme: FloatingActionButtonThemeData(
         backgroundColor: Color(0xff21BF73),
         foregroundColor: Colors.white,
-        shape: CircleBorder(),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(7)
+        ),
       ),
     );
   }

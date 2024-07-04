@@ -38,6 +38,7 @@ class _CompletedTaskScreenState extends State<CompletedTaskScreen> {
             child: Padding(
               padding: EdgeInsets.only(left: 15, top: 10, right: 15, bottom: 10),
               child: NewTaskItem(taskListModel: _completedTaskList,
+              onUpdateTask: () async{ await _getSomeCompletedTask();},
               child: Container(
                 width: 100,
                 decoration: BoxDecoration(
@@ -56,6 +57,7 @@ class _CompletedTaskScreenState extends State<CompletedTaskScreen> {
       ),
     );
   }
+
   //=======================================================FUNCTIONS=======================================================
   Future<void> _getSomeCompletedTask() async{
     if(mounted){
