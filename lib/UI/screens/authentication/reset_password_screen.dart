@@ -1,9 +1,17 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:task_manager/UI/utility/url_list.dart';
 import 'package:task_manager/UI/widgets/background_widget.dart';
+import 'package:task_manager/UI/widgets/snack_bar_message.dart';
+import 'package:task_manager/data/model/api_response.dart';
+import 'package:task_manager/data/network_caller/api_call.dart';
 
 class ResetPasswordScreen extends StatefulWidget {
-  const ResetPasswordScreen({super.key});
+  const ResetPasswordScreen(
+      {super.key, required this.email, required this.otp});
+
+  final String email;
+  final String otp;
 
   @override
   State<ResetPasswordScreen> createState() => _ResetPasswordScreenState();
@@ -42,6 +50,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                     height: 20,
                   ),
                   TextFormField(
+                    obscureText: true,
                     controller: _tEcPassword,
                     decoration: const InputDecoration(
                       hintText: 'Password',
@@ -51,6 +60,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                     height: 10,
                   ),
                   TextFormField(
+                    obscureText: true,
                     controller: _tEcConfirmPassword,
                     decoration: const InputDecoration(
                       hintText: 'Confirm Password',
@@ -59,8 +69,61 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                   const SizedBox(
                     height: 10,
                   ),
-                  ElevatedButton(
-                      onPressed: () {}, child: const Text('CONFIRM')),
+                  Visibility(
+                    visible: _loading == false,
+                    replacement: const SizedBox(
+                      height: 25,
+                      width: 25,
+                      child: CircularProgressIndicator(
+                        color: Color(0xff21BF73),
+                      ),
+                    ),
+                    child: ElevatedButton(
+                        onPressed: () async {
+                          setState(() {
+                            _loading = true;
+                          });
+                          if (_tEcPassword.text == _tEcConfirmPassword.text) {
+                            Map<String, dynamic> userInfoAndNewPassword = {
+                              "email": widget.email,
+                              "OTP": widget.otp,
+                              "password": _tEcConfirmPassword.text,
+                            };
+                            ApiResponse setNewPassword =
+                                await ApiCall.postResponse(
+                                    URLList.reSetPassword,
+                                    userInfoAndNewPassword);
+                            if (setNewPassword.isSuccess &&
+                                mounted &&
+                                setNewPassword.responseData['status'] ==
+                                    'success') {
+                              bottomPopUpMessage(context,
+                                  'Now you can login with your new password!');
+                              Navigator.pop(context);
+                            } else {
+                              if (mounted) {
+                                bottomPopUpMessage(
+                                    context, 'Something went wrong',
+                                    showError: true);
+                                await Future.delayed(
+                                    const Duration(seconds: 02));
+                                setState(() {
+                                  _loading = false;
+                                });
+                              }
+                            }
+                          } else {
+                            bottomPopUpMessage(
+                                context, "Password doesn't match",
+                                showError: true);
+                            await Future.delayed(const Duration(seconds: 02));
+                            setState(() {
+                              _loading = false;
+                            });
+                          }
+                        },
+                        child: const Text('CONFIRM')),
+                  ),
                   const SizedBox(
                     height: 20,
                   ),
@@ -95,6 +158,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
   //=======================================================VARIABLES=======================================================
   final TextEditingController _tEcConfirmPassword = TextEditingController();
   final TextEditingController _tEcPassword = TextEditingController();
+  bool _loading = false;
 
   //=======================================================FUNCTIONS=======================================================
   void _onTapSignInScreen() {

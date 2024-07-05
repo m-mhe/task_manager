@@ -118,12 +118,14 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                     ),
                     TextFormField(
                       autovalidateMode: AutovalidateMode.onUserInteraction,
-                      validator: (v){
-                        if(v==null){
+                      validator: (v) {
+                        if (v == null) {
                           return 'Please enter your Phone Number';
-                        }else if(Validator.mobileNumberValidator.hasMatch(v) == false){
+                        } else if (Validator.mobileNumberValidator
+                                .hasMatch(v) ==
+                            false) {
                           return 'Please enter a valid Phone Number';
-                        }else{
+                        } else {
                           return null;
                         }
                       },
@@ -147,6 +149,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                       height: 10,
                     ),
                     TextFormField(
+                      obscureText: true,
                       controller: _tEcPassword,
                       decoration: const InputDecoration(
                         hintText: 'Password',
@@ -156,11 +159,13 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                       height: 10,
                     ),
                     Visibility(
-                      visible: _loading==false,
-                      replacement: SizedBox(
-                        height: 25,
+                      visible: _loading == false,
+                      replacement: const SizedBox(
+                          height: 25,
                           width: 25,
-                          child: CircularProgressIndicator(color: Color(0xff21BF73),)),
+                          child: CircularProgressIndicator(
+                            color: Color(0xff21BF73),
+                          )),
                       child: ElevatedButton(
                           onPressed: _onPressUpdateProfile,
                           child: const Icon(Icons.arrow_circle_right_outlined)),
@@ -212,48 +217,53 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
     }
     setState(() {});
   }
-  Future<void> _onPressUpdateProfile() async{
+
+  Future<void> _onPressUpdateProfile() async {
     setState(() {
-      _loading=true;
+      _loading = true;
     });
-    String encodedImg = AuthenticationController.userData?.photo??'';
-    if(_formKeyUpdateProfile.currentState!.validate()){
+    String encodedImg = AuthenticationController.userData?.photo ?? '';
+    if (_formKeyUpdateProfile.currentState!.validate()) {
       Map<String, dynamic> userDataForUpdate = {
         "email": _tEcEmail.text,
         "firstName": _tEcFName.text,
         "lastName": _tEcLName.text,
         "mobile": _tEcMobile.text,
       };
-      if(_tEcPassword.text.isNotEmpty){
+      if (_tEcPassword.text.isNotEmpty) {
         userDataForUpdate["password"] = _tEcPassword.text;
       }
-      if(_imageOfUser != null){
+      if (_imageOfUser != null) {
         File file = File(_imageOfUser!.path);
         encodedImg = base64Encode(file.readAsBytesSync());
         userDataForUpdate["photo"] = encodedImg;
       }
-      ApiResponse updateProfile = await ApiCall.postResponse(URLList.upDateProfile, userDataForUpdate);
-      if(updateProfile.isSuccess && mounted){
+      ApiResponse updateProfile =
+          await ApiCall.postResponse(URLList.upDateProfile, userDataForUpdate);
+      if (updateProfile.isSuccess &&
+          mounted &&
+          updateProfile.responseData['status'] == 'success') {
         UserDataModel userDataModel = UserDataModel(
-          email: _tEcEmail.text,
-          photo: encodedImg,
-          firstName: _tEcFName.text,
-          lastName: _tEcLName.text,
-          mobile: _tEcMobile.text
-        );
+            email: _tEcEmail.text,
+            photo: encodedImg,
+            firstName: _tEcFName.text,
+            lastName: _tEcLName.text,
+            mobile: _tEcMobile.text);
         await AuthenticationController.saveUserData(userDataModel);
         bottomPopUpMessage(context, 'Profile Updated!');
-        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=> const BottomNavBar()), (route)=>false);
-      }else{
-        if(mounted){
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (context) => const BottomNavBar()),
+            (route) => false);
+      } else {
+        if (mounted) {
           bottomPopUpMessage(context, 'Something went wrong', showError: true);
-          await Future.delayed(Duration(seconds: 02));
+          await Future.delayed(const Duration(seconds: 02));
           setState(() {
-            _loading=false;
+            _loading = false;
           });
         }
       }
     }
   }
-
 }

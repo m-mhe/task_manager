@@ -4,8 +4,15 @@ import 'package:task_manager/UI/screens/authentication/reset_password_screen.dar
 import 'package:task_manager/UI/widgets/background_widget.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
+import '../../../data/model/api_response.dart';
+import '../../../data/network_caller/api_call.dart';
+import '../../utility/url_list.dart';
+import '../../widgets/snack_bar_message.dart';
+
 class PinForResettingPasswordScreen extends StatefulWidget {
-  const PinForResettingPasswordScreen({super.key});
+  const PinForResettingPasswordScreen({super.key, required this.email});
+
+  final String email;
 
   @override
   State<PinForResettingPasswordScreen> createState() =>
@@ -69,9 +76,19 @@ class _PinForResettingPasswordScreenState
                   const SizedBox(
                     height: 10,
                   ),
-                  ElevatedButton(
-                      onPressed: _onTapSetPasswordScreen,
-                      child: const Text('VERIFY')),
+                  Visibility(
+                    visible: _loading == false,
+                    replacement: const SizedBox(
+                      height: 25,
+                      width: 25,
+                      child: CircularProgressIndicator(
+                        color: Color(0xff21BF73),
+                      ),
+                    ),
+                    child: ElevatedButton(
+                        onPressed: _onTapSetPasswordScreen,
+                        child: const Text('VERIFY')),
+                  ),
                   const SizedBox(
                     height: 20,
                   ),
@@ -105,15 +122,38 @@ class _PinForResettingPasswordScreenState
 
   //=======================================================VARIABLES=======================================================
   final TextEditingController _tEcPin = TextEditingController();
+  bool _loading = false;
 
   //=======================================================FUNCTIONS=======================================================
   void _onTapSignInScreen() {
     Navigator.pop(context);
   }
 
-  void _onTapSetPasswordScreen() {
-    Navigator.pushReplacement(context,
-        MaterialPageRoute(builder: (context) => const ResetPasswordScreen()));
+  Future<void> _onTapSetPasswordScreen() async {
+    setState(() {
+      _loading = true;
+    });
+    ApiResponse getResponseFromServer = await ApiCall.getResponse(
+        URLList.otpResettingPassword('${widget.email}/${_tEcPin.text}'));
+    if (getResponseFromServer.isSuccess &&
+        mounted &&
+        getResponseFromServer.responseData['status'] == 'success') {
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+              builder: (context) => ResetPasswordScreen(
+                    email: widget.email,
+                    otp: _tEcPin.text,
+                  )));
+    } else {
+      if (mounted) {
+        bottomPopUpMessage(context, 'Wrong input', showError: true);
+        await Future.delayed(const Duration(seconds: 02));
+        setState(() {
+          _loading = false;
+        });
+      }
+    }
   }
 
   @override

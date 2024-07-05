@@ -10,8 +10,16 @@ class URLList {
   static const String getProgressTask = '$fromAllTheTask/Progress';
   static const String getStatus = '$_baseURL/taskStatusCount';
   static const String upDateProfile = '$_baseURL/profileUpdate';
+  static const String reSetPassword = '$_baseURL/RecoverResetPass';
+
   static updateStatus(String idAndStatus) =>
       '$_baseURL/updateTaskStatus/$idAndStatus';
 
   static deleteTask(String iD) => '$_baseURL/deleteTask/$iD';
+
+  static emailForResettingPassword(String email) =>
+      '$_baseURL/RecoverVerifyEmail/$email';
+
+  static otpResettingPassword(String emailAndOtp) =>
+      '$_baseURL/RecoverVerifyOTP/$emailAndOtp';
 }
