@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:task_manager/UI/screens/authentication/sign_in_screen.dart';
 import 'package:task_manager/UI/screens/authentication/update_profile_screen.dart';
@@ -18,11 +19,15 @@ AppBar profileAppBar(context, [bool isItUpdateProfileScreen = false]) {
       child: Padding(
         padding: const EdgeInsets.only(left: 15),
         child: Container(
-          decoration: const BoxDecoration(
+          decoration: BoxDecoration(
               shape: BoxShape.circle,
               image: DecorationImage(
-                  image: NetworkImage(
-                      'https://images.pexels.com/users/avatars/291180653/momin-hosan-emon-255.jpeg?auto=compress&fit=crop&h=130&w=130&dpr=1'))),
+                image: MemoryImage(
+                  base64Decode(AuthenticationController.userData?.photo ??
+                      ''),
+                ),
+                fit: BoxFit.cover,
+              )),
         ),
       ),
     ),

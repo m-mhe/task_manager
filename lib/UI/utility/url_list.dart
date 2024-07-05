@@ -9,7 +9,7 @@ class URLList {
   static const String getCanceledTask = '$fromAllTheTask/Canceled';
   static const String getProgressTask = '$fromAllTheTask/Progress';
   static const String getStatus = '$_baseURL/taskStatusCount';
-
+  static const String upDateProfile = '$_baseURL/profileUpdate';
   static updateStatus(String idAndStatus) =>
       '$_baseURL/updateTaskStatus/$idAndStatus';
 

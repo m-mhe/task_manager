@@ -59,6 +59,9 @@ class _MyAppState extends State<MyApp> {
         enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(7),
             borderSide: BorderSide(color: Colors.grey.shade200)),
+        disabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(7),
+            borderSide: BorderSide(color: Colors.grey.shade200)),
         focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(7),
             borderSide: const BorderSide(color: Colors.white)),

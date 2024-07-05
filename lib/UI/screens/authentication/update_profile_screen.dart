@@ -1,7 +1,18 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:task_manager/UI/utility/url_list.dart';
+import 'package:task_manager/UI/utility/validator.dart';
 import 'package:task_manager/UI/widgets/background_widget.dart';
+import 'package:task_manager/UI/widgets/bottom_navigation_bar.dart';
 import 'package:task_manager/UI/widgets/profile_app_bar.dart';
+import 'package:task_manager/UI/widgets/snack_bar_message.dart';
 import 'package:task_manager/data/controller/authentication_controller.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:task_manager/data/model/api_response.dart';
+import 'package:task_manager/data/model/user_data_model.dart';
+import 'package:task_manager/data/network_caller/api_call.dart';
 
 class UpdateProfileScreen extends StatefulWidget {
   const UpdateProfileScreen({super.key});
@@ -39,32 +50,53 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                     ),
                     Container(
                       width: double.maxFinite,
-                      height: 55,
+                      height: 54,
                       decoration: BoxDecoration(
                         color: Colors.grey[200],
                         borderRadius: BorderRadius.circular(7),
                       ),
                       alignment: Alignment.centerLeft,
-                      child: Container(
-                        height: 50,
-                        width: 100,
-                        alignment: Alignment.center,
-                        decoration: const BoxDecoration(
-                          color: Colors.black54,
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(7),
-                              bottomLeft: Radius.circular(7)),
-                        ),
-                        child: Text(
-                          'Photos',
-                          style: TextStyle(
-                              color: Colors.grey[200],
-                              fontWeight: FontWeight.w500),
-                        ),
+                      child: Row(
+                        children: [
+                          InkWell(
+                            onTap: _onPressGetImg,
+                            child: Container(
+                              height: 54,
+                              width: 100,
+                              alignment: Alignment.center,
+                              decoration: const BoxDecoration(
+                                color: Colors.black54,
+                                borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(7),
+                                    bottomLeft: Radius.circular(7)),
+                              ),
+                              child: Text(
+                                'Photos',
+                                style: TextStyle(
+                                    color: Colors.grey[200],
+                                    fontWeight: FontWeight.w500),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Expanded(
+                            child: Text(
+                              _imageOfUser?.name ?? 'Select an image',
+                              style: const TextStyle(
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                        ],
                       ),
                     ),
                     const SizedBox(
-                      height: 20,
+                      height: 10,
                     ),
                     TextFormField(
                       controller: _tEcFName,
@@ -85,6 +117,16 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                       height: 10,
                     ),
                     TextFormField(
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      validator: (v){
+                        if(v==null){
+                          return 'Please enter your Phone Number';
+                        }else if(Validator.mobileNumberValidator.hasMatch(v) == false){
+                          return 'Please enter a valid Phone Number';
+                        }else{
+                          return null;
+                        }
+                      },
                       keyboardType: TextInputType.number,
                       controller: _tEcMobile,
                       decoration: const InputDecoration(
@@ -95,7 +137,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                       height: 10,
                     ),
                     TextFormField(
-                      keyboardType: TextInputType.emailAddress,
+                      enabled: false,
                       controller: _tEcEmail,
                       decoration: const InputDecoration(
                         hintText: 'Email',
@@ -113,9 +155,16 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                     const SizedBox(
                       height: 10,
                     ),
-                    ElevatedButton(
-                        onPressed: () {},
-                        child: const Icon(Icons.arrow_circle_right_outlined)),
+                    Visibility(
+                      visible: _loading==false,
+                      replacement: SizedBox(
+                        height: 25,
+                          width: 25,
+                          child: CircularProgressIndicator(color: Color(0xff21BF73),)),
+                      child: ElevatedButton(
+                          onPressed: _onPressUpdateProfile,
+                          child: const Icon(Icons.arrow_circle_right_outlined)),
+                    ),
                     const SizedBox(
                       height: 50,
                     ),
@@ -129,6 +178,16 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
     );
   }
 
+  @override
+  void dispose() {
+    super.dispose();
+    _tEcEmail.dispose();
+    _tEcPassword.dispose();
+    _tEcFName.dispose();
+    _tEcLName.dispose();
+    _tEcMobile.dispose();
+  }
+
   //=======================================================VARIABLES=======================================================
   final TextEditingController _tEcEmail = TextEditingController(
       text: AuthenticationController.userData!.email ?? '');
@@ -140,16 +199,61 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
       text: AuthenticationController.userData!.mobile ?? '');
   final TextEditingController _tEcPassword = TextEditingController();
   final GlobalKey<FormState> _formKeyUpdateProfile = GlobalKey<FormState>();
+  XFile? _imageOfUser;
+  bool _loading = false;
 
   //=======================================================FUNCTIONS=======================================================
-
-  @override
-  void dispose() {
-    super.dispose();
-    _tEcEmail.dispose();
-    _tEcPassword.dispose();
-    _tEcFName.dispose();
-    _tEcLName.dispose();
-    _tEcMobile.dispose();
+  Future<void> _onPressGetImg() async {
+    ImagePicker imagePicker = ImagePicker();
+    final XFile? image =
+        await imagePicker.pickImage(source: ImageSource.gallery);
+    if (image != null) {
+      _imageOfUser = image;
+    }
+    setState(() {});
   }
+  Future<void> _onPressUpdateProfile() async{
+    setState(() {
+      _loading=true;
+    });
+    String encodedImg = AuthenticationController.userData?.photo??'';
+    if(_formKeyUpdateProfile.currentState!.validate()){
+      Map<String, dynamic> userDataForUpdate = {
+        "email": _tEcEmail.text,
+        "firstName": _tEcFName.text,
+        "lastName": _tEcLName.text,
+        "mobile": _tEcMobile.text,
+      };
+      if(_tEcPassword.text.isNotEmpty){
+        userDataForUpdate["password"] = _tEcPassword.text;
+      }
+      if(_imageOfUser != null){
+        File file = File(_imageOfUser!.path);
+        encodedImg = base64Encode(file.readAsBytesSync());
+        userDataForUpdate["photo"] = encodedImg;
+      }
+      ApiResponse updateProfile = await ApiCall.postResponse(URLList.upDateProfile, userDataForUpdate);
+      if(updateProfile.isSuccess && mounted){
+        UserDataModel userDataModel = UserDataModel(
+          email: _tEcEmail.text,
+          photo: encodedImg,
+          firstName: _tEcFName.text,
+          lastName: _tEcLName.text,
+          mobile: _tEcMobile.text
+        );
+        await AuthenticationController.saveUserData(userDataModel);
+        bottomPopUpMessage(context, 'Profile Updated!');
+        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=> const BottomNavBar()), (route)=>false);
+      }else{
+        if(mounted){
+          bottomPopUpMessage(context, 'Something went wrong', showError: true);
+          await Future.delayed(Duration(seconds: 02));
+          setState(() {
+            _loading=false;
+          });
+        }
+      }
+    }
+  }
+
 }
