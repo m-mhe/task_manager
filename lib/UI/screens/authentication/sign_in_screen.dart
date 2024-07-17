@@ -1,16 +1,13 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:task_manager/UI/screens/authentication/email_for_resetting_password_screen.dart';
 import 'package:task_manager/UI/screens/authentication/sign_up_screen.dart';
-import 'package:task_manager/UI/utility/url_list.dart';
 import 'package:task_manager/UI/utility/validator.dart';
 import 'package:task_manager/UI/widgets/background_widget.dart';
 import 'package:task_manager/UI/widgets/bottom_navigation_bar.dart';
 import 'package:task_manager/UI/widgets/snack_bar_message.dart';
-import 'package:task_manager/data/controller/authentication_controller.dart';
-import 'package:task_manager/data/model/api_response.dart';
-import 'package:task_manager/data/model/log_in_model.dart';
-import 'package:task_manager/data/network_caller/api_call.dart';
+import 'package:task_manager/data/controller/sign_in_controller.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
@@ -82,17 +79,21 @@ class _SignInScreenState extends State<SignInScreen> {
                     const SizedBox(
                       height: 10,
                     ),
-                    Visibility(
-                      visible: notLoading,
-                      replacement: const SizedBox(
-                          height: 25,
-                          width: 25,
-                          child: CircularProgressIndicator(
-                            color: Color(0xff21BF73),
-                          )),
-                      child: ElevatedButton(
-                          onPressed: _onTapNewTaskScreen,
-                          child: const Icon(Icons.arrow_circle_right_outlined)),
+                    GetBuilder<SignInController>(
+                      builder: (signInController) {
+                        return Visibility(
+                          visible: signInController.notLoading,
+                          replacement: const SizedBox(
+                              height: 25,
+                              width: 25,
+                              child: CircularProgressIndicator(
+                                color: Color(0xff21BF73),
+                              )),
+                          child: ElevatedButton(
+                              onPressed: _onTapNewTaskScreen,
+                              child: const Icon(Icons.arrow_circle_right_outlined)),
+                        );
+                      }
                     ),
                     const SizedBox(
                       height: 20,
@@ -140,6 +141,7 @@ class _SignInScreenState extends State<SignInScreen> {
   bool notLoading = true;
 
   //=======================================================FUNCTIONS=======================================================
+  /*Instead of this block of code we have used GetX method
   Future<void> signInServer() async {
     setState(() {
       notLoading = false;
@@ -180,7 +182,7 @@ class _SignInScreenState extends State<SignInScreen> {
         });
       }
     }
-  }
+  }*/
 
   void _onTapEmailVerificationScreen() {
     Navigator.push(
@@ -202,7 +204,22 @@ class _SignInScreenState extends State<SignInScreen> {
 
   Future<void> _onTapNewTaskScreen() async {
     if (_formKey.currentState!.validate()) {
-      await signInServer();
+      SignInController signInController = Get.find<SignInController>();
+      bool signInServer = await signInController.signInServer(email: _tEcEmail.text.trim(), password: _tEcPassword.text,);
+      if(signInServer){
+        Get.offAll(()=>const BottomNavBar());
+        if(mounted){
+          bottomPopUpMessage(
+            context,
+            'Sign In Success!',
+          );
+        }
+      }else{
+        if(mounted){
+          bottomPopUpMessage(context, 'Kindly check your email or password!',
+              showError: true);
+        }
+      }
     }
   }
 

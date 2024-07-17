@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:task_manager/UI/screens/authentication/splash_screen.dart';
+import 'package:task_manager/controller_binder.dart';
 
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
@@ -13,12 +15,13 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       navigatorKey: MyApp.navigatorKey,
       debugShowCheckedModeBanner: false,
       title: 'Task Manager',
       theme: _appThemeData(),
       home: const SplashScreen(),
+      initialBinding: ControllerBinder(),
     );
   }
 
