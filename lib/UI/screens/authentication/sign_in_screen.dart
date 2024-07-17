@@ -138,7 +138,6 @@ class _SignInScreenState extends State<SignInScreen> {
   final TextEditingController _tEcEmail = TextEditingController();
   final TextEditingController _tEcPassword = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  bool notLoading = true;
 
   //=======================================================FUNCTIONS=======================================================
   /*Instead of this block of code we have used GetX method

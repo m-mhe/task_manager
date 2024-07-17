@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:task_manager/UI/widgets/background_widget.dart';
 import 'package:task_manager/UI/widgets/task_item.dart';
 
-import '../../data/controller/task_controller.dart';
+import '../../data/controller/task_model_wrapper.dart';
 import '../../data/model/api_response.dart';
 import '../../data/model/saved_user_task_data.dart';
 import '../../data/network_caller/api_call.dart';
