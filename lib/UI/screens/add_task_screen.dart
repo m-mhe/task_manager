@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/get_navigation.dart';
 import 'package:task_manager/UI/widgets/background_widget.dart';
 import 'package:task_manager/UI/widgets/profile_app_bar.dart';
 import 'package:task_manager/UI/widgets/snack_bar_message.dart';
@@ -97,11 +99,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                               await ApiCall.postResponse(
                                   URLList.createTask, userResponse);
                           if (getResponseFromTheServer.isSuccess && mounted) {
-                            Navigator.pushAndRemoveUntil(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const BottomNavBar()),
-                                (route) => false);
+                            Get.offAll(()=>const BottomNavBar());
                             bottomPopUpMessage(context, 'A New Task Added!',
                                 showError: false);
                           } else {

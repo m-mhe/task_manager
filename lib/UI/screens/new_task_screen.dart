@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/get_instance.dart';
+import 'package:get/get_navigation/get_navigation.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:task_manager/UI/screens/add_task_screen.dart';
 import 'package:task_manager/UI/widgets/background_widget.dart';
@@ -42,7 +43,7 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
         child: GetBuilder<NewTaskController>(
           builder: (taskController) {
             return Visibility(
-              visible: taskController.loading == false,
+              visible: taskController.loading == false&&_loading==false,
               replacement: const Center(
                 child: CircularProgressIndicator(
                   color: Color(0xff21BF73),
@@ -68,7 +69,7 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
                         height: 7,
                       ),
                       Expanded(
-                        child: NewTaskItem(
+                        child: TaskItem(
                           taskListModel: taskController.newTaskList.reversed.toList(),
                           onUpdateTask: () async {
                             _initialCall();
@@ -109,12 +110,7 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
   }
 
   void _onPressAddTaskScreen() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => const AddTaskScreen(),
-      ),
-    );
+    Get.to(()=>const AddTaskScreen());
   }
 
   Future<void> _getTaskStatus() async {

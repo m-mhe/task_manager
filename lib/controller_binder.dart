@@ -7,6 +7,6 @@ class ControllerBinder extends Bindings{
   @override
   void dependencies() {
     Get.lazyPut(()=>SignInController(), fenix: true);
-    Get.lazyPut(()=>NewTaskController());
+    Get.lazyPut(()=>NewTaskController(), fenix: true);
   }
 }

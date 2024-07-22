@@ -5,8 +5,8 @@ import 'package:task_manager/data/network_caller/api_call.dart';
 import '../../data/model/saved_user_task_data.dart';
 import '../utility/url_list.dart';
 
-class NewTaskItem extends StatefulWidget {
-  const NewTaskItem(
+class TaskItem extends StatefulWidget {
+  const TaskItem(
       {super.key,
       required this.child,
       required this.taskListModel,
@@ -17,10 +17,10 @@ class NewTaskItem extends StatefulWidget {
   final VoidCallback onUpdateTask;
 
   @override
-  State<NewTaskItem> createState() => _NewTaskItemState();
+  State<TaskItem> createState() => _TaskItemState();
 }
 
-class _NewTaskItemState extends State<NewTaskItem> {
+class _TaskItemState extends State<TaskItem> {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(

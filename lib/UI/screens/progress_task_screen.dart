@@ -41,7 +41,7 @@ class _ProgressTaskScreenState extends State<ProgressTaskScreen> {
             child: Padding(
               padding: const EdgeInsets.only(
                   left: 15, top: 10, right: 15, bottom: 10),
-              child: NewTaskItem(
+              child: TaskItem(
                 taskListModel: _progressTaskList,
                 onUpdateTask: () async {
                   await _getSomeProgressTask();

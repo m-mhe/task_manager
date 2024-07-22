@@ -43,7 +43,7 @@ class _CompletedTaskScreenState extends State<CompletedTaskScreen> {
             child: Padding(
               padding: const EdgeInsets.only(
                   left: 15, top: 10, right: 15, bottom: 10),
-              child: NewTaskItem(
+              child: TaskItem(
                 taskListModel: _completedTaskList,
                 onUpdateTask: () async {
                   await _getSomeCompletedTask();
