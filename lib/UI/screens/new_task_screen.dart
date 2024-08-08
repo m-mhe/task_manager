@@ -7,7 +7,7 @@ import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:task_manager/UI/screens/add_task_screen.dart';
 import 'package:task_manager/UI/widgets/background_widget.dart';
 import 'package:task_manager/data/controller/new_task_controller.dart';
-import 'package:task_manager/data/controller/task_status_model_wrapper.dart';
+import 'package:task_manager/data/wrapper/task_status_model_wrapper.dart';
 import 'package:task_manager/data/model/task_status_model.dart';
 import '../../data/model/api_response.dart';
 import '../../data/network_caller/api_call.dart';

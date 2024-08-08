@@ -99,9 +99,12 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                               await ApiCall.postResponse(
                                   URLList.createTask, userResponse);
                           if (getResponseFromTheServer.isSuccess && mounted) {
-                            Get.offAll(()=>const BottomNavBar());
                             bottomPopUpMessage(context, 'A New Task Added!',
                                 showError: false);
+                            _notLoading =true;
+                            _tEcDescription.clear();
+                            _tEcSubject.clear();
+                            setState(() {});
                           } else {
                             if (mounted) {
                               setState(() {

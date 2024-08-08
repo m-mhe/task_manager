@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../data/controller/task_model_wrapper.dart';
+import '../../data/wrapper/task_model_wrapper.dart';
 import '../../data/model/api_response.dart';
 import '../../data/model/saved_user_task_data.dart';
 import '../../data/network_caller/api_call.dart';
