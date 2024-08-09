@@ -19,7 +19,6 @@ class CompletedTaskScreen extends StatefulWidget {
 }
 
 class _CompletedTaskScreenState extends State<CompletedTaskScreen> {
-
   @override
   void initState() {
     super.initState();
@@ -46,7 +45,8 @@ class _CompletedTaskScreenState extends State<CompletedTaskScreen> {
                   padding: const EdgeInsets.only(
                       left: 15, top: 10, right: 15, bottom: 10),
                   child: TaskItem(
-                    taskListModel: controller.completedTaskList.reversed.toList(),
+                    taskListModel:
+                        controller.completedTaskList.reversed.toList(),
                     onUpdateTask: () async {
                       await _initialize();
                     },

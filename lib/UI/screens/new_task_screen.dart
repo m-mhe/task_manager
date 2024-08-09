@@ -24,7 +24,7 @@ class NewTaskScreen extends StatefulWidget {
 
 class _NewTaskScreenState extends State<NewTaskScreen> {
   List<TaskStatusModel> _taskStatusList = [];
-  bool _loading =false;
+  bool _loading = false;
 
   @override
   initState() {
@@ -40,61 +40,61 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
         onRefresh: () async {
           _initialCall();
         },
-        child: GetBuilder<NewTaskController>(
-          builder: (taskController) {
-            return Visibility(
-              visible: taskController.loading == false&&_loading==false,
-              replacement: const Center(
-                child: CircularProgressIndicator(
-                  color: Color(0xff21BF73),
-                ),
+        child: GetBuilder<NewTaskController>(builder: (taskController) {
+          return Visibility(
+            visible: taskController.loading == false && _loading == false,
+            replacement: const Center(
+              child: CircularProgressIndicator(
+                color: Color(0xff21BF73),
               ),
-              child: BackgroundWidget(
-                child: Padding(
-                  padding: const EdgeInsets.only(
-                      left: 15, top: 10, right: 15, bottom: 10),
-                  child: Column(
-                    children: [
-                      SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Row(
-                          children: _taskStatusList.map((e) {
-                            return _summaryCard(
-                                number: e.sum.toString(),
-                                title: (e.sId ?? 'unknown').toUpperCase());
-                          }).toList(),
-                        ),
+            ),
+            child: BackgroundWidget(
+              child: Padding(
+                padding: const EdgeInsets.only(
+                    left: 15, top: 10, right: 15, bottom: 10),
+                child: Column(
+                  children: [
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: _taskStatusList.map((e) {
+                          return _summaryCard(
+                              number: e.sum.toString(),
+                              title: (e.sId ?? 'unknown').toUpperCase());
+                        }).toList(),
                       ),
-                      const SizedBox(
-                        height: 7,
-                      ),
-                      Expanded(
-                        child: TaskItem(
-                          taskListModel: taskController.newTaskList.reversed.toList(),
-                          onUpdateTask: () async {
-                            _initialCall();
-                          },
-                          child: Container(
-                            width: 100,
-                            decoration: BoxDecoration(
-                                color: Colors.lightBlue,
-                                borderRadius: BorderRadius.circular(80)),
-                            child: const Text(
-                              "New",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  color: Colors.white, fontWeight: FontWeight.w600),
-                            ),
+                    ),
+                    const SizedBox(
+                      height: 7,
+                    ),
+                    Expanded(
+                      child: TaskItem(
+                        taskListModel:
+                            taskController.newTaskList.reversed.toList(),
+                        onUpdateTask: () async {
+                          _initialCall();
+                        },
+                        child: Container(
+                          width: 100,
+                          decoration: BoxDecoration(
+                              color: Colors.lightBlue,
+                              borderRadius: BorderRadius.circular(80)),
+                          child: const Text(
+                            "New",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w600),
                           ),
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
-            );
-          }
-        ),
+            ),
+          );
+        }),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _onPressAddTaskScreen,
@@ -104,13 +104,13 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
   }
 
   //=======================================================FUNCTIONS=======================================================
-  void _initialCall(){
+  void _initialCall() {
     _getTaskStatus();
     Get.find<NewTaskController>().getSomeNewTask(context: context);
   }
 
   void _onPressAddTaskScreen() {
-    Get.to(()=>const AddTaskScreen());
+    Get.to(() => const AddTaskScreen());
   }
 
   Future<void> _getTaskStatus() async {

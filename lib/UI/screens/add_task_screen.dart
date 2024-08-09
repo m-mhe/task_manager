@@ -101,7 +101,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                           if (getResponseFromTheServer.isSuccess && mounted) {
                             bottomPopUpMessage(context, 'A New Task Added!',
                                 showError: false);
-                            _notLoading =true;
+                            _notLoading = true;
                             _tEcDescription.clear();
                             _tEcSubject.clear();
                             setState(() {});
@@ -134,6 +134,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
       ),
     );
   }
+
   @override
   void dispose() {
     super.dispose();

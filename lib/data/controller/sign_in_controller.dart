@@ -5,11 +5,13 @@ import '../model/log_in_model.dart';
 import '../network_caller/api_call.dart';
 import 'authentication_controller.dart';
 
-class SignInController extends GetxController{
+class SignInController extends GetxController {
   bool _notLoading = true;
+
   bool get notLoading => _notLoading;
 
-  Future<bool> signInServer({required String email, required String password}) async {
+  Future<bool> signInServer(
+      {required String email, required String password}) async {
     bool success = false;
     _notLoading = false;
     update();
@@ -18,17 +20,17 @@ class SignInController extends GetxController{
       "password": password,
     };
     ApiResponse getServerResponse =
-    await ApiCall.postResponse(URLList.logInURL, userSignInData);
+        await ApiCall.postResponse(URLList.logInURL, userSignInData);
     if (getServerResponse.isSuccess == true) {
-        LogInModel logInModel =
-        LogInModel.fromJson(getServerResponse.responseData);
-        await AuthenticationController.saveLogInToken(logInModel.token!);
-        await AuthenticationController.saveUserData(logInModel.data!);
-        success = true;
-        _notLoading = true;
+      LogInModel logInModel =
+          LogInModel.fromJson(getServerResponse.responseData);
+      await AuthenticationController.saveLogInToken(logInModel.token!);
+      await AuthenticationController.saveUserData(logInModel.data!);
+      success = true;
+      _notLoading = true;
     } else {
-        success = false;
-        _notLoading = true;
+      success = false;
+      _notLoading = true;
     }
     update();
     return success;

@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:task_manager/UI/utility/url_list.dart';
 import 'package:task_manager/UI/utility/validator.dart';
