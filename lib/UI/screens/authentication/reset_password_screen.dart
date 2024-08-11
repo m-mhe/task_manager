@@ -5,6 +5,7 @@ import 'package:task_manager/UI/widgets/background_widget.dart';
 import 'package:task_manager/UI/widgets/snack_bar_message.dart';
 import 'package:task_manager/data/model/api_response.dart';
 import 'package:task_manager/data/network_caller/api_call.dart';
+import 'package:get/get.dart';
 
 class ResetPasswordScreen extends StatefulWidget {
   const ResetPasswordScreen(
@@ -162,7 +163,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
 
   //=======================================================FUNCTIONS=======================================================
   void _onTapSignInScreen() {
-    Navigator.pop(context);
+    Get.back();
   }
 
   @override

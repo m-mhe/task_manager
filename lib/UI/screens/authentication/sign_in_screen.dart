@@ -184,21 +184,11 @@ class _SignInScreenState extends State<SignInScreen> {
   }*/
 
   void _onTapEmailVerificationScreen() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => const EmailForResettingPasswordScreen(),
-      ),
-    );
+    Get.to(const EmailForResettingPasswordScreen());
   }
 
   void _onTapSignUpScreen() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => const SignUpScreen(),
-      ),
-    );
+    Get.to(const SignUpScreen());
   }
 
   Future<void> _onTapNewTaskScreen() async {

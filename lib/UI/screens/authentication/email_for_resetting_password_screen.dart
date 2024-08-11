@@ -6,6 +6,7 @@ import 'package:task_manager/UI/widgets/background_widget.dart';
 import 'package:task_manager/UI/widgets/snack_bar_message.dart';
 import 'package:task_manager/data/model/api_response.dart';
 import 'package:task_manager/data/network_caller/api_call.dart';
+import 'package:get/get.dart';
 
 class EmailForResettingPasswordScreen extends StatefulWidget {
   const EmailForResettingPasswordScreen({super.key});
@@ -113,7 +114,7 @@ class _EmailForResettingPasswordScreenState
 
   //=======================================================FUNCTIONS=======================================================
   void _onTapSignInScreen() {
-    Navigator.pop(context);
+    Get.back();
   }
 
   Future<void> _onTapPinVerificationScreen() async {
@@ -125,16 +126,9 @@ class _EmailForResettingPasswordScreenState
     if (getResponseFromServer.isSuccess &&
         mounted &&
         getResponseFromServer.responseData['status'] == 'success') {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) {
-            return PinForResettingPasswordScreen(
-              email: _tEcEmail.text.trim(),
-            );
-          },
-        ),
-      );
+      Get.off(PinForResettingPasswordScreen(
+        email: _tEcEmail.text.trim(),
+      ));
     } else {
       if (mounted) {
         bottomPopUpMessage(context, 'There is no such user', showError: true);

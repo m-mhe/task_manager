@@ -6,6 +6,7 @@ import 'package:task_manager/UI/widgets/background_widget.dart';
 import 'package:task_manager/UI/widgets/snack_bar_message.dart';
 import 'package:task_manager/data/model/api_response.dart';
 import 'package:task_manager/data/network_caller/api_call.dart';
+import 'package:get/get.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -208,7 +209,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   //=======================================================FUNCTIONS=======================================================
   void _onTapSignInScreen() {
-    Navigator.pop(context);
+    Get.back();
   }
 
   Future<void> _registerUserInputToServer() async {
@@ -235,7 +236,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         _registrationInProgress = false;
       });
       await Future.delayed(const Duration(seconds: 1));
-      Navigator.pop(context);
+      Get.back();
     } else {
       if (mounted) {
         bottomPopUpMessage(context, 'Registration failed! Please try again.',

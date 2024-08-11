@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:task_manager/UI/screens/authentication/reset_password_screen.dart';
 import 'package:task_manager/UI/widgets/background_widget.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
-
+import 'package:get/get.dart';
 import '../../../data/model/api_response.dart';
 import '../../../data/network_caller/api_call.dart';
 import '../../utility/url_list.dart';
@@ -126,7 +126,7 @@ class _PinForResettingPasswordScreenState
 
   //=======================================================FUNCTIONS=======================================================
   void _onTapSignInScreen() {
-    Navigator.pop(context);
+    Get.back();
   }
 
   Future<void> _onTapSetPasswordScreen() async {
@@ -138,13 +138,10 @@ class _PinForResettingPasswordScreenState
     if (getResponseFromServer.isSuccess &&
         mounted &&
         getResponseFromServer.responseData['status'] == 'success') {
-      Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-              builder: (context) => ResetPasswordScreen(
-                    email: widget.email,
-                    otp: _tEcPin.text,
-                  )));
+      Get.off(ResetPasswordScreen(
+        email: widget.email,
+        otp: _tEcPin.text,
+      ));
     } else {
       if (mounted) {
         bottomPopUpMessage(context, 'Wrong input', showError: true);

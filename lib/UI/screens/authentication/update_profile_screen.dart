@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:task_manager/UI/utility/url_list.dart';
 import 'package:task_manager/UI/utility/validator.dart';
 import 'package:task_manager/UI/widgets/background_widget.dart';
-import 'package:task_manager/UI/widgets/bottom_navigation_bar.dart';
+import 'package:get/get.dart';
 import 'package:task_manager/UI/widgets/profile_app_bar.dart';
 import 'package:task_manager/UI/widgets/snack_bar_message.dart';
 import 'package:task_manager/data/controller/authentication_controller.dart';
@@ -12,6 +12,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:task_manager/data/model/api_response.dart';
 import 'package:task_manager/data/model/user_data_model.dart';
 import 'package:task_manager/data/network_caller/api_call.dart';
+
+import '../../widgets/bottom_navigation_bar.dart';
 
 class UpdateProfileScreen extends StatefulWidget {
   const UpdateProfileScreen({super.key});
@@ -250,10 +252,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
             mobile: _tEcMobile.text);
         await AuthenticationController.saveUserData(userDataModel);
         bottomPopUpMessage(context, 'Profile Updated!');
-        Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(builder: (context) => const BottomNavBar()),
-            (route) => false);
+        Get.offAll(const BottomNavBar());
       } else {
         if (mounted) {
           bottomPopUpMessage(context, 'Something went wrong', showError: true);
