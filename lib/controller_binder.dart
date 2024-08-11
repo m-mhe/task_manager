@@ -9,10 +9,10 @@ import 'data/controller/new_task_controller.dart';
 class ControllerBinder extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut(() => SignInController());
-    Get.lazyPut(() => NewTaskController());
-    Get.lazyPut(() => CompletedTaskController());
-    Get.lazyPut(() => CanceledTaskController());
-    Get.lazyPut(() => ProgressTaskController());
+    Get.lazyPut(() => SignInController(), fenix: true);
+    Get.lazyPut(() => NewTaskController(), fenix: true);
+    Get.lazyPut(() => CompletedTaskController(), fenix: true);
+    Get.lazyPut(() => CanceledTaskController(), fenix: true);
+    Get.lazyPut(() => ProgressTaskController(), fenix: true);
   }
 }
